@@ -10,7 +10,7 @@ const Allarticles = () => {
   // Ensure it's always an array
   const articles = Array.isArray(articlesData)
     ? articlesData
-    : articlesData?.data || []; // if backend sends { data: [...] }
+    : articlesData?.data || [];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -21,36 +21,53 @@ const Allarticles = () => {
       : articles.filter(article => article.category === selectedCategory);
 
   return (
-    <div className='justify-center mx-auto w-11/12 text-center my-10'>
-      <h1 className='text-3xl font-bold text-blue-900 mb-6'>All Articles</h1>
+    <div className='bg-base-200'>
+    <div className="w-11/12 mx-auto mb-10 pt-20 ">
+      <h1 className="text-3xl font-bold mb-3 text-center">
+        All Articles
+      </h1>
+      <p className="text-center text-gray-400 mb-6 max-w-2xl mx-auto text-sm">
+  Discover a diverse range of articles covering technology, health, education, and lifestyle. 
+  Whether you're here to learn, explore, or get inspired, our curated collection brings you 
+  fresh perspectives and expert insights.
+</p>
 
-      {/* Category Filter Dropdown */}
-      <div className="mb-6">
-        <label className="font-medium mr-2">Filter by Category:</label>
-        <select
-          className="select select-bordered"
-          value={selectedCategory}
-          onChange={e => setSelectedCategory(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Tech">Tech</option>
-          <option value="Education">Education</option>
-          <option value="Health">Health</option>
-          <option value="Lifestyle">Lifestyle</option>
-        </select>
-      </div>
-
-      {/* Articles Grid */}
-      {filteredArticles.length === 0 ? (
-        <p>No Articles Found</p>
-      ) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
-          {filteredArticles.map(article => (
-            <ArticleCard key={article._id} article={article} />
-          ))}
+      <div className="flex gap-8">
+        {/* Sidebar Filter */}
+        <div className="w-1/4  p-5  bg-base-100 rounded-lg shadow">
+          <h2 className="font-bold  text-lg mb-4">Filter by Category</h2>
+          <ul className="space-y-3">
+            {['All', 'Tech', 'Education', 'Health', 'Lifestyle'].map(category => (
+              <li key={category}>
+                <button
+                  onClick={() => setSelectedCategory(category)}
+                  className={`block w-full text-left px-3 py-2 rounded-lg ${
+                    selectedCategory === category
+                      ? 'bg-blue-600 text-white font-semibold'
+                      : 'bg-base-100 hover:bg-gray-100 hover:text-black'
+                  }`}
+                >
+                  {category}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
-    </div>
+
+        {/* Articles Grid */}
+        <div className="flex-1">
+          {filteredArticles.length === 0 ? (
+            <p>No Articles Found</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredArticles.map(article => (
+                <ArticleCard key={article._id} article={article} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div></div>
   );
 };
 
