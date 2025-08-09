@@ -28,7 +28,7 @@ const Banner = () => {
               repeat: Infinity,
               repeatDelay: 0,
               ease: "easeInOut",
-              delay: (index * 5), // stagger the animations by 5 seconds each
+              delay: (index * 4), // stagger the animations by 5 seconds each
             }}
           />
         ))}
