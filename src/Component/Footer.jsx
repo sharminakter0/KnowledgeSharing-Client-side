@@ -1,7 +1,8 @@
 import React from 'react';
-import logo from "../../src/assets/light-bulb.png"
+
 import { FaLinkedin } from "react-icons/fa6";
 import { Link } from 'react-router';
+import KnowledgeLogo from './KnowledgeLogo/KnowledgeLogo';
 const Footer = () => {
     return (
         <div>
@@ -9,12 +10,7 @@ const Footer = () => {
   <aside>
     
      
-   <div className='flex justify-center  '>
-    <img
-   className='h-8 w-8 ' src={logo} alt="" />
-
-   <h1 className='text-2xl text-center font-semibold mb-3 '>ThinkTrove</h1>
-   </div>
+   <KnowledgeLogo/>
     <p>
       © 2025 Knowledge Sharing Platform. All rights reserved.
     </p>

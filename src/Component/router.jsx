@@ -17,6 +17,8 @@ import CategoriesPage from "../Pages/CategoriesPage";
 import MyArticles from "../Pages/MyArticles";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import DashboardLayout from "./Dashboard/DashboardLayout";
+import TermsOfUse from "./TermofUse/TermofUse";
 
 
 const router = createBrowserRouter([
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
    children:[
     { 
       index:true, 
-      loader:()=>fetch('https://knowledege-project.vercel.app/articles'),
+      loader:()=>fetch('http://localhost:3000/articles'),
       Component:Home
 
     } ,
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
     },
     {
       path:"/all-articles",
-      loader:()=>fetch("https://knowledege-project.vercel.app/articles"),
+      loader:()=>fetch("http://localhost:3000/articles"),
       element:<Allarticles></Allarticles>
     },
    {
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
    {
     path:"/categorys/:category",
     element:<CategoriesPage></CategoriesPage>,
-    loader:({params})=>fetch(`https://knowledege-project.vercel.app/articles?category=${params.category}`)
+    loader:({params})=>fetch(`http://localhost:3000/articles?category=${params.category}`)
    }
     ,
     {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
 
       path:"/about-us",
       element:<AboutUs></AboutUs>
+    },
+    {
+      path:"/term-use",
+      element:<TermsOfUse></TermsOfUse>
+    },
+    {
+      path:"/dashboard",
+      element:<PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>
     }
 
 

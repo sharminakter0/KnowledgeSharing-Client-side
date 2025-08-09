@@ -6,7 +6,7 @@ import Home from '../Pages/Home';
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className='bg-base-200'>
         <Header></Header>
         
         <Outlet>

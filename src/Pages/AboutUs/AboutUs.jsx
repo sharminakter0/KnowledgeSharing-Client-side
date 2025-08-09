@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className="w-11/12 max-w-5xl mx-auto py-12 px-4">
+    <div className="w-11/12 max-w-5xl mx-auto py-12 px-4 bg-white my-12">
       <h1 className="text-4xl font-bold text-center text-blue-900 mb-3">About Us</h1>
       <p className="text-lg text-gray-700 mb-10 text-center">
         Welcome to our Knowledge Sharing Platform — a space where students connect, learn, and grow together. 

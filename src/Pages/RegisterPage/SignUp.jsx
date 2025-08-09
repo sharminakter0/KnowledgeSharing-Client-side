@@ -6,10 +6,14 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthProvider';
 
-import registerAnimation from "../../assets/lottie/Animation - 1750145128598 (1).json"
+
 import Lottie from 'lottie-react';
 
 import {motion} from "motion/react"
+
+import logo from '../../assets/lottie/cENfIyCPDD.json'
+import BackHomebutton from '../../Component/BackToHome/BackHomebutton';
+
 
 
 
@@ -104,33 +108,32 @@ const RagisterPage = () => {
   return (
 
     <>
-        <h1 className=' text-center mt-10 font-bold text-4xl text-blue-950 '><motion.span 
-      animate={
-        {
-            color:['#65ff33','#f633ff','#334fff','#bf33ff','#33f4ff','#ff3353'],
-       transition:{duration:7,repeat:Infinity} 
+       
 
-      }}
-    >ThinkTrove</motion.span> Sign Up</h1>
+    <div className='my-10  
+    
+    items-center-safe  justify-center gap-4 '>
 
-    <div className='mt-10 flex flex-col lg:flex-row  items-center-safe  justify-center gap-4 '>
-
-
-     
-
-      <div className=''>
-     <Lottie
-     animationData={registerAnimation}
-     loop={true}
-     className="w-72 md:w-96 mx-auto  gap-0">
+        <div className='place-content-center text-center items-center-safe gap-0'>
+                     <Lottie
+           animationData={logo}
+           loop={true}
+           className="w-20 md:w-25 mx-auto  gap-0 ">
+            
       
+           </Lottie>
+                  </div>
 
-     </Lottie>
-      </div>
+     <div className="">
+      
     <form onSubmit={handleRegister}>
-      <div className="card bg-base-100 max-w-md mx-auto   shadow-2xl border border-opacity-10  border-[#33ffb4] pb-6 px-4">
-        <div className="card-body p-8">
-          <h2 className="text-3xl font-bold text-center mb-5 text-[#33ffa7]">
+      <div className="card bg-base-100 max-w-md mx-auto   shadow-2xl   pb-6 px-4">
+        
+        <div className="card-body p-8 ">
+          <div className="flex justify-center">
+          <BackHomebutton></BackHomebutton></div>
+          
+          <h2 className="text-3xl font-bold text-center mb-5 text-blue-950">
             Create An Account
           </h2>
           
@@ -186,7 +189,7 @@ const RagisterPage = () => {
                 placeholder="••••••••"
                 name="password"
                 required
-                 
+                
               />
               <div
               
@@ -209,20 +212,20 @@ const RagisterPage = () => {
 
             <div className="form-control">
               <label className="label cursor-pointer">
-                <input type="checkbox" className="checkbox checkbox-success  border-[#33ff56] size-5" required />
+                <input type="checkbox" className="checkbox checkbox-info  border-[#33ff56] size-5" required />
                 <span className="label-text ml-2 text-sm">
-                  I agree to the <a className="link link-primary text-[#33ffa7] hover:text-[#33f6ff]">Terms of Service</a> and{' '}
-                  <a className="link link-primary  text-[#33ffa7] hover:text-[#33f6ff]">Privacy Policy</a>
+                  I agree to the <a className="link link-primary text-gray-700 hover:text-[#33f6ff]">Terms of Service</a> and{' '}
+                  <a className="link link-primary  text-gray-700  hover:text-[#33f6ff]">Privacy Policy</a>
                 </span>
               </label>
             </div>
 
-            <button type="submit" className="btn btn-success   mt-3 px-36">
+            <button type="submit" className="btn bg-blue-950 text-white  mt-3 px-36">
               Register
             </button>
           </fieldset>
 
-          <div className="divider my-3">OR REGISTER WITH</div>
+          <div className="divider text-sm my-3">OR REGISTER WITH</div>
 
           <div className="flex justify-center gap-4">
            <Link to="">  <button onClick={handleGooleLogin} type="button" className="btn px-36">
@@ -232,13 +235,15 @@ const RagisterPage = () => {
 
           <p className="text-center text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/auth/sign-in" className="link link-primary   text-[#33ffa7] hover:text-[#33f6ff] font-medium">
+            <Link to="/auth/sign-in" className="link link-primary   text-blue-950 hover:text-[#33f6ff] font-medium">
              Login
             </Link>
           </p>
         </div>
       </div>
-    </form>
+    </form></div>
+
+   
     </div></>
   );
 };

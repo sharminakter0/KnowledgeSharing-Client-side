@@ -15,7 +15,7 @@ const ArticleCardDetails = () => {
 
     // fetch articles info
     useEffect(()=>{
-        fetch(`https://knowledege-project.vercel.app/articles/${id}`)
+        fetch(`http://localhost:3000/articles/${id}`)
         .then(res=>res.json())
         .then(data =>
          setArticle(data));
@@ -23,7 +23,7 @@ const ArticleCardDetails = () => {
 
     // fetch comments collection
     useEffect(() => {
-        fetch(`https://knowledege-project.vercel.app/comments/${id}`)
+        fetch(`http://localhost:3000/comments/${id}`)
         .then(res => res.json())
         .then(data => setComments(data));
     }, [id]);  
@@ -31,7 +31,7 @@ const ArticleCardDetails = () => {
 
     useEffect(() => {
       if (user?.email) {
-        fetch(`https://knowledege-project.vercel.app/likes/${id}`)
+        fetch(`http://localhost:3000/likes/${id}`)
          .then(res => res.json())
          .then(data => {
            setAlreadyLiked(data?.users?.includes(user.email));
@@ -51,7 +51,7 @@ const ArticleCardDetails = () => {
      text: commentText,
      timestamp:new Date(),
     };
-     fetch(`https://knowledege-project.vercel.app/comments`, {
+     fetch(`http://localhost:3000/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -64,7 +64,7 @@ const ArticleCardDetails = () => {
       });
   };
    const handleLike = () => {
-    fetch(`https://knowledege-project.vercel.app/likes`, {
+    fetch(`http://localhost:3000/likes`, {
       method: 'POST',
       headers:{'content-type':'application/json'},
       body: JSON.stringify({
