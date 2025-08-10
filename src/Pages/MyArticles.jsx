@@ -43,7 +43,7 @@ const MyArticles = () => {
       <h2 className="text-3xl font-bold mb-4 text-center">My Articles</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
-          <thead className="bg-green-200 text-green-800">
+          <thead className="bg-base-300  ">
             <tr>
               <th>Thumbnail</th>
               <th>Title</th>

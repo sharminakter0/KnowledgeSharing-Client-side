@@ -40,7 +40,7 @@ const Banner = () => {
     <motion.img
       src={banner1}
       animate={{
-        y:[40, 0, 40],
+        y:[50, 0, 50],
         
       }}
       transition={{duration:7, repeat: Infinity}}

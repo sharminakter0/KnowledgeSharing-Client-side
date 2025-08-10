@@ -214,8 +214,9 @@ const RagisterPage = () => {
               <label className="label cursor-pointer">
                 <input type="checkbox" className="checkbox checkbox-info  border-[#33ff56] size-5" required />
                 <span className="label-text ml-2 text-sm">
-                  I agree to the <a className="link link-primary text-gray-700 hover:text-[#33f6ff]">Terms of Service</a> and{' '}
-                  <a className="link link-primary  text-gray-700  hover:text-[#33f6ff]">Privacy Policy</a>
+                  I agree to the <Link  to="/term-use" className="
+                 text-gray-700 hover:text-[#33f6ff]">Terms of Service</Link> and{' '}
+               
                 </span>
               </label>
             </div>

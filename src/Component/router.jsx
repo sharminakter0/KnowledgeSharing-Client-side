@@ -19,6 +19,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import DashboardLayout from "./Dashboard/DashboardLayout";
 import TermsOfUse from "./TermofUse/TermofUse";
+import MyProfile from "./MyProfile/MyProfile";
 
 
 const router = createBrowserRouter([
@@ -32,12 +33,7 @@ const router = createBrowserRouter([
       Component:Home
 
     } ,
-     {
-      path:"/post-articles",
-      element: <PrivateRouter>
-        <PostArticles></PostArticles>
-      </PrivateRouter>
-    },
+     
     {
       path:"/all-articles",
       loader:()=>fetch("http://localhost:3000/articles"),
@@ -54,12 +50,7 @@ const router = createBrowserRouter([
     loader:({params})=>fetch(`http://localhost:3000/articles?category=${params.category}`)
    }
     ,
-    {
-      path:"/my-articles",
-      element:<PrivateRouter>
-        <MyArticles></MyArticles>
-      </PrivateRouter>
-    },
+  
     {
 
       path:"/about-us",
@@ -69,16 +60,41 @@ const router = createBrowserRouter([
       path:"/term-use",
       element:<TermsOfUse></TermsOfUse>
     },
-    {
-      path:"/dashboard",
-      element:<PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>
-    }
+    
 
 
 
   
   ]
+
+
   },
+
+  {
+      path:"/dashboard",
+      element:<PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
+      children:[
+         {
+        index:true,
+        element:<MyProfile></MyProfile>
+      },
+       {
+      path:"/dashboard/post-articles",
+      element:<PostArticles></PostArticles>
+      },
+       {
+      path:"/dashboard/my-articles",
+      element:<MyArticles></MyArticles>
+
+    },
+    {
+      path:"/dashboard/my-profile",
+      element:<MyProfile></MyProfile>
+    }
+
+
+  ]
+    },
   {
     path:"*",
     element:<ErrorPage></ErrorPage>

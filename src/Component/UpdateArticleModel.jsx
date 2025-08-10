@@ -37,7 +37,7 @@ const UpdateArticleModel = ({article,setSelectedArticle,setMyArticles,myArticles
     };
     return (
          <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded w-full max-w-md">
+      <div className="bg-base-100 p-6 rounded w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Update Article</h2>
         <form onSubmit={handleUpdate} className="space-y-4">
           <input

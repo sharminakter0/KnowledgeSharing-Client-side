@@ -14,6 +14,7 @@ const PostArticles = () => {
     // Add extra user info
     newArticles.email = user?.email || '';
     newArticles.userName = user?.displayName || '';
+    newArticles.userPhotoURL = user?.photoURL ||'';
 
     // Get token from local storage
     const token = localStorage.getItem('access-token');
@@ -59,8 +60,8 @@ const PostArticles = () => {
 
   return (
     <div className='w-11/12 mx-auto text-center my-12'>
-      <h2 className='text-4xl font-bold mb-5 text-blue-400'>
-        <span className='text-blue-950'>Post</span> New Articles
+      <h2 className='text-4xl font-bold mb-5 '>
+        <span className=''>Post</span> New Articles
       </h2>
       <p className='text-sm text-gray-500'>
         "Have something valuable to share? Post your article and let your words reach a wider audience."
@@ -68,7 +69,7 @@ const PostArticles = () => {
       <div>
         <form
           onSubmit={handleAddArticles}
-          className='bg-blue-50 py-6 px-3 mt-7 shadow border-blue-400 border-1 rounded-3xl'
+          className='bg-base-100 py-6 px-3 mt-7 shadow border-blue-950 border-1 rounded-3xl'
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-6'>
             {/* Title */}
@@ -158,7 +159,7 @@ const PostArticles = () => {
 
           <input
             type='submit'
-            className='btn btn-success mt-7 w-full font-bold'
+            className='btn bg-blue-950 text-white mt-7 w-full font-bold'
             value='Post Articles'
           />
         </form>

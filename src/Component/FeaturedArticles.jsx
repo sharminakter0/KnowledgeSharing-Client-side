@@ -13,7 +13,7 @@ const FeaturedArticles = ({articles}) => {
    <p className="text-center text-sm mb-10 text-gray-500">Explore our handpicked selection of insightful articles written by top contributors. These featured pieces highlight trending topics, expert advice, <br /> and fresh perspectives to keep you informed and inspired. Whether you're here to learn, grow, or share, our featured content is the perfect place to start.</p>
    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
      {featured.map(article => (
-          <div key={article._id} className="card border  p-3">
+          <div key={article._id} className="bg-base-100 card border    p-3">
             {article.thumbnail && (
               <img
                 src={article.thumbnail}
