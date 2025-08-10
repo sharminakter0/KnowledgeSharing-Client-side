@@ -6,7 +6,7 @@ import KnowledgeLogo from './KnowledgeLogo/KnowledgeLogo';
 const Footer = () => {
     return (
         <div>
-           <footer className="footer sm:footer-horizontal bg-blue-950 text-white  p-10">
+           <footer className="footer sm:footer-horizontal bg-blue-950 text-white  px-10 py-15">
   <aside>
     
      
@@ -15,6 +15,12 @@ const Footer = () => {
       © 2025 Knowledge Sharing Platform. All rights reserved.
     </p>
   </aside>
+   <nav>
+    <h6 className="footer-title">Contact</h6>
+    <p>📞 +8801315770897</p>
+    <p>📧 support@thinktrove.com</p>
+    <p>📍 Barisal, Innovation City, 56789</p>
+  </nav>
   
   
   <nav>

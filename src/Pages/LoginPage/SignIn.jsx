@@ -96,7 +96,7 @@ const handleGooleLogin =()=>{
   <div className="card-body p-8"> 
     <div className='flex justify-center'>
       <BackHomebutton></BackHomebutton></div>
-    <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-blue-950"> 
+    <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-blue-900 "> 
      Sign In Your Account
     </h2>
     
@@ -155,7 +155,7 @@ const handleGooleLogin =()=>{
     </div>
     
     <p className="text-center text-sm mt-2">
-      Don't have an account? <Link to={"/auth/sign-up"} className='link text-blue-950 font-medium'> Sign Up </Link>
+      Don't have an account? <Link to={"/auth/sign-up"} className='link text-blue-900 font-medium'> Sign Up </Link>
     </p>
   </div>
 </div>
