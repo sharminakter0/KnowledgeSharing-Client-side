@@ -20,6 +20,7 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import DashboardLayout from "./Dashboard/DashboardLayout";
 import TermsOfUse from "./TermofUse/TermofUse";
 import MyProfile from "./MyProfile/MyProfile";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
     {
       path:"/term-use",
       element:<TermsOfUse></TermsOfUse>
+    },
+    {
+      path:"/privacy",
+      element:<PrivacyPolicy></PrivacyPolicy>
     },
     
 

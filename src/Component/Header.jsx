@@ -82,7 +82,8 @@ const Header = () => {
             
              title={user.displayName ||'user'} /> 
              <button onClick={logout}
-             className='btn border-green-500 btn-success btn-soft  '>Logout</button>
+             className='btn 
+              btn-info  btn-outline  '>Logout</button>
             </div>
           ):(
     

@@ -54,7 +54,7 @@ const ExtraSection1 = () => {
       >
         <h2 className="text-3xl   text-center font-bold   mb-6 " >Top Contributors</h2>
         <p className='text-sm text-gray-600 text-center mb-6'>Meet the students who go above and beyond in sharing knowledge and helping others grow. <br />Our top contributors regularly post valuable content, answer questions, and inspire the community with their dedication and expertise.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-7 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-7 mb-8">
           {topUsers.map((user, index) => (
             <motion.div
             
@@ -79,17 +79,17 @@ const ExtraSection1 = () => {
           {latestArticles.map(article => (
 
             
-            <div key={article._id} className="card bg-base-100 shadow-sm"
+            <div key={article._id} className="p-3 bg-base-100  rounded-lg shadow-sm"
             >
 
               
               <figure>
-                <img src={article.thumbnail || 'https://via.placeholder.com/400x200'} alt="Article" className="h-48 w-full object-cover" />
+                <img src={article.thumbnail || 'https://via.placeholder.com/400x200'} alt="Article" className="h-40 w-full object-cover rounded-lg" />
               </figure>
               <div className="card-body">
                 <h3 className="text-lg font-bold">{article.title}</h3>
                 <p className="text-sm text-gray-500">By {article.userName || 'Unknown'}</p>
-                <Link to={`/article-details/${article._id}`} className="btn btn-sm btn-outline btn-info mt-2">Read More</Link>
+
               </div>
             </div>
           ))}

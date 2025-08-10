@@ -19,8 +19,8 @@ const Footer = () => {
   
   <nav>
     <h6 className="footer-title">Legal</h6>
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
+   <Link to="/term-use" className='link-hover'>Terms & Use</Link>
+    <Link to="/privacy" className='link-hover'>Privacy Policy</Link>
 
     <Link to="/about-us" className='link-hover'>About Us</Link>
     <div>
