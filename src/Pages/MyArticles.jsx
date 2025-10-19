@@ -11,7 +11,7 @@ const MyArticles = () => {
     const [selectedArticle,setSelectedArticle]=useState(null);
 
     useEffect(()=>{
-        fetch(`https://knowledege-project.vercel.app/articles?email=${user.email}`)
+        fetch(`http://localhost:5000/articles?email=${user.email}`)
         .then(res =>res.json()
     .then(data =>setMyArticles(data)
 ))
@@ -27,7 +27,7 @@ const MyArticles = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then(result => {
       if (result.isConfirmed) {
-        fetch(`https://knowledege-project.vercel.app/articles/${id}`, {
+        fetch(`http://localhost:5000/articles/${id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

@@ -15,7 +15,7 @@ const ExtraSection1 = () => {
 
   // 🔹 Load all articles and compute Top Contributors
   useEffect(() => {
-    fetch('https://knowledege-project.vercel.app/articles')
+    fetch('http://localhost:5000/articles')
       .then(res => res.json())
       .then(data => {
         // ✅ Count articles by user

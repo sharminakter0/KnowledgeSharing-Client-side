@@ -32,7 +32,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex space-x-6 font-medium">
+        <nav className="hidden lg:flex space-x-6 text-sm">
           <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Home</NavLink>
           <NavLink to="/all-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>All Articles</NavLink>
           {user && (

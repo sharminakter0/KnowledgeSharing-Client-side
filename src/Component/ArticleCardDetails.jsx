@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const ArticleCardDetails = () => {
   const { id } = useParams();
@@ -10,32 +11,56 @@ const ArticleCardDetails = () => {
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState(0);
   const [alreadyLiked, setAlreadyLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+ 
+
 
   // Fetch article info
   useEffect(() => {
-    fetch(`https://knowledege-project.vercel.app/articles/${id}`)
+    fetch(`http://localhost:5000/articles/${id}`)
       .then(res => res.json())
       .then(data => setArticle(data));
   }, [id]);
 
   // Fetch comments
   useEffect(() => {
-    fetch(`https://knowledege-project.vercel.app/comments/${id}`)
+    fetch(`http://localhost:5000/comments/${id}`)
       .then(res => res.json())
       .then(data => setComments(data));
   }, [id]);
 
   // Fetch like status
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`https://knowledege-project.vercel.app/likes/${id}`)
-        .then(res => res.json())
-        .then(data => {
-          setAlreadyLiked(data?.users?.includes(user.email));
-          setLikes(data?.count || 0);
-        });
-    }
-  }, [user, id]);
+
+useEffect(() => {
+  if (user?.email) {
+    fetch(`http://localhost:5000/likes/${id}?userEmail=${user.email}`)
+      .then(res => res.json())
+      .then(data => {
+        setAlreadyLiked(data.userLiked);
+        setLikes(data.totalLikes);
+      });
+  } else {
+    // If user not logged in, just fetch total likes
+    fetch(`http://localhost:5000/likes/${id}`)
+      .then(res => res.json())
+      .then(data => setLikes(data.totalLikes));
+  }
+}, [user, id]);
+
+   useEffect(() => {
+  if (user?.email) {
+    fetch(`http://localhost:5000/bookmarks`, {
+      headers: { authorization: `Bearer ${user.token}` } // your Firebase token
+    })
+      .then(res => res.json())
+      .then(data => {
+        const isBookmarked = data.some(article => article._id === id);
+        setBookmarked(isBookmarked);
+      });
+  }
+}, [user, id]);
+
+
 
   const handleComment = e => {
     e.preventDefault();
@@ -49,7 +74,7 @@ const ArticleCardDetails = () => {
       timestamp: new Date(),
     };
 
-    fetch(`https://knowledege-project.vercel.app/comments`, {
+    fetch(`http://localhost:5000/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -61,23 +86,84 @@ const ArticleCardDetails = () => {
       });
   };
 
-  const handleLike = () => {
-    fetch(`https://knowledege-project.vercel.app/likes`, {
+    const handleLike = () => {
+     if (!alreadyLiked) {
+    // Add like
+    fetch(`http://localhost:5000/likes`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         articleId: id,
         userEmail: user.email,
       }),
-    }).then(res => {
-      if (res.ok) {
-        setLikes(prev => prev + 1);
-        setAlreadyLiked(true);
-      } else {
-        alert("You already liked this article");
-      }
-    });
-  };
+    })
+      .then(res => {
+        if (res.ok) {
+          setLikes(prev => prev + 1);
+          setAlreadyLiked(true);
+        } else {
+          alert("You already liked this article");
+        }
+      });
+  } else {
+    // Remove like
+    fetch(`http://localhost:5000/likes`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        articleId: id,
+        userEmail: user.email,
+      }),
+    })
+      .then(res => res.json())
+      .then(() => {
+        setLikes(prev => prev - 1);
+        setAlreadyLiked(false);
+      })
+      .catch(err => console.error("Failed to unlike:", err));
+  }
+};
+
+const handleBookmark = () => {
+  if (!bookmarked) {
+    // Save bookmark
+    fetch("http://localhost:5000/bookmarks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${user.token}`,
+      },
+      body: JSON.stringify({ articleId: id }),
+    })
+      .then(res => res.json())
+      .then(() => {
+        setBookmarked(true);
+        toast.success("🔖 Article bookmarked!");
+      })
+      .catch(err => {
+        console.error(err);
+        toast.error("Failed to bookmark article");
+      });
+  } else {
+    // Remove bookmark
+    fetch(`http://localhost:5000/bookmarks/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${user.token}`,
+      },
+    })
+      .then(() => {
+        setBookmarked(false);
+        toast("Bookmark removed", { icon: "🗑️" });
+      })
+      .catch(err => {
+        console.error(err);
+        toast.error("Failed to remove bookmark");
+      });
+  }
+};
+
+
 
   return (
     <div className="w-11/12 mx-auto my-15  grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -103,16 +189,22 @@ const ArticleCardDetails = () => {
         </div>
 
         <div className="flex gap-4 my-4">
-          <button
-            onClick={handleLike}
-            className="btn btn-outline btn-success"
-            disabled={alreadyLiked}
-          >
-            ❤️ Like ({likes})
-          </button>
+         <button
+  onClick={handleLike}
+  className={`btn btn-outline ${alreadyLiked ? "btn-error" : "btn-success"}`}
+>
+  {alreadyLiked ? `❤️liked (${likes})` : ` Like (${likes})`}
+</button>
           <span className="border px-2 py-2 border-green-500 rounded">
             💬 Comments ({comments.length})
           </span>
+
+       <button
+  onClick={handleBookmark}
+  className={`btn btn-outline ${bookmarked ? "btn-warning" : "btn-info"}`}
+>
+  {bookmarked ? "🔖 Bookmarked" : "📑 Save"}
+</button>   
         </div>
       </div>
 

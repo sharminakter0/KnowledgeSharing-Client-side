@@ -20,7 +20,7 @@ const PostArticles = () => {
     const token = localStorage.getItem('access-token');
 
     try {
-      const res = await fetch('https://knowledege-project.vercel.app/articles', {
+      const res = await fetch('http://localhost:5000/articles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
