@@ -23,6 +23,7 @@ import MyProfile from "./MyProfile/MyProfile";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import AdminRoute from "../AdminRoutes/AdminRoute";
 import ManageUsers from "../Pages/MangeUsers/ManageUsers";
+import ManageArticles from "../Pages/ManageArticles/ManageArticles";
 
 
 const router = createBrowserRouter([
@@ -102,6 +103,15 @@ const router = createBrowserRouter([
       element: (
         <AdminRoute>
           <ManageUsers />
+        </AdminRoute>
+      ),
+    },
+
+     {
+      path: "/dashboard/manage-articles",
+      element: (
+        <AdminRoute>
+          <ManageArticles />
         </AdminRoute>
       ),
     },

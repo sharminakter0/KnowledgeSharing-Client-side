@@ -72,9 +72,9 @@ const ManageUsers = () => {
     <div className="max-w-5xl mx-auto mt-10 p-4">
       <h2 className="text-2xl font-bold mb-6 text-center">Manage Users</h2>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+      <div className="overflow-x-auto bg-base-100 shadow-md rounded-lg">
         <table className="min-w-full border">
-          <thead className="bg-gray-100">
+          <thead className="bg-base-300">
             <tr>
               <th className="py-3 px-4 text-left border">#</th>
               <th className="py-3 px-4 text-left border">Name</th>
