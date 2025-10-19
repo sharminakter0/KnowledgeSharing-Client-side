@@ -33,6 +33,7 @@ const DashboardLayout = () => {
 
   const adminMenu = (
     <>
+    <li><NavLink to="/dashboard/my-profile">My Profile</NavLink></li>
       <li><NavLink to="/dashboard/manage-users">Manage Users</NavLink></li>
       <li><NavLink to="/dashboard/manage-articles">Manage Articles</NavLink></li>
       <li><NavLink to="/dashboard/site-stats">Site Statistics</NavLink></li>

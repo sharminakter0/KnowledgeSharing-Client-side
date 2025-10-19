@@ -7,6 +7,7 @@ import {
   signOut,
   updateProfile,
   GoogleAuthProvider,
+  
 } from 'firebase/auth';
 import axios from 'axios';
 import { auth } from '../Firebase/firebase.config';
@@ -46,6 +47,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+
+  const updateUserProfile = async (displayName, photoURL, ) => {
+  if (auth.currentUser) {
+    await updateProfile(auth.currentUser, { displayName, photoURL });
+    // Optional: save `bio` to Firestore if you store additional user data
+  }
+};
 
   // -------------------------
   // Helper: Save user to MongoDB
@@ -127,7 +135,8 @@ const AuthProvider = ({ children }) => {
     setLoading,
     gLogin,
     token,
-    role, // use this for role-based access
+    role,
+    updateUserProfile, // use this for role-based access
   };
 
   return <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>;
