@@ -21,6 +21,8 @@ import DashboardLayout from "./Dashboard/DashboardLayout";
 import TermsOfUse from "./TermofUse/TermofUse";
 import MyProfile from "./MyProfile/MyProfile";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import AdminRoute from "../AdminRoutes/AdminRoute";
+import ManageUsers from "../Pages/MangeUsers/ManageUsers";
 
 
 const router = createBrowserRouter([
@@ -75,31 +77,37 @@ const router = createBrowserRouter([
 
   },
 
-  {
-      path:"/dashboard",
-      element:<PrivateRouter><DashboardLayout></DashboardLayout></PrivateRouter>,
-      children:[
-         {
-        index:true,
-        element:<MyProfile></MyProfile>
-      },
-       {
-      path:"/dashboard/post-articles",
-      element:<PostArticles></PostArticles>
-      },
-       {
-      path:"/dashboard/my-articles",
-      element:<MyArticles></MyArticles>
-
+ {
+  path: "/dashboard",
+  element: <PrivateRouter><DashboardLayout /></PrivateRouter>,
+  children: [
+    {
+      index: true,
+      element: <MyProfile />,
     },
     {
-      path:"/dashboard/my-profile",
-      element:<MyProfile></MyProfile>
-    }
-
-
-  ]
+      path: "/dashboard/post-articles",
+      element: <PostArticles />,
     },
+    {
+      path: "/dashboard/my-articles",
+      element: <MyArticles />,
+    },
+    {
+      path: "/dashboard/my-profile",
+      element: <MyProfile />,
+    },
+    {
+      path: "/dashboard/manage-users",
+      element: (
+        <AdminRoute>
+          <ManageUsers />
+        </AdminRoute>
+      ),
+    },
+  ],
+},
+
   {
     path:"*",
     element:<ErrorPage></ErrorPage>

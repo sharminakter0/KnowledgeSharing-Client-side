@@ -8,6 +8,7 @@ import {
   updateProfile,
   GoogleAuthProvider,
 } from 'firebase/auth';
+import axios from 'axios';
 import { auth } from '../Firebase/firebase.config';
 
 export const AuthContext = createContext();
@@ -15,58 +16,89 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null); // Role: 'admin', 'user', 'verified-user'
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
 
-  // Create user
+  // -------------------------
+  // Auth functions
+  // -------------------------
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // Login
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Update user profile
   const updateUser = (updateData) => {
     return updateProfile(auth.currentUser, updateData);
   };
 
-  // Google login
   const gLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
-  // Logout
   const logout = () => {
     setLoading(true);
     return signOut(auth);
   };
- // console.log('hi')
 
+  // -------------------------
+  // Helper: Save user to MongoDB
+  // -------------------------
+  const saveUserToDB = async (currentUser) => {
+    if (!currentUser?.email) return;
+
+    const userData = {
+      name: currentUser.displayName || 'Anonymous',
+      email: currentUser.email,
+      role: 'user', // default role
+    };
+
+    try {
+      await axios.post('http://localhost:5000/users', userData);
+      console.log('✅ User saved to DB');
+    } catch (err) {
+      console.error('❌ Failed to save user:', err);
+    }
+  };
+
+  // -------------------------
   // Watch Firebase auth state
+  // -------------------------
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
 
       if (currentUser) {
-        currentUser.getIdToken()
-          .then((idToken) => {
-            localStorage.setItem('access-token', idToken);
-            setToken(idToken);
-            console.log('✅ Firebase token fetched:', token);
-          })
-          .catch((err) => {
-            console.error('❌ Failed to get token:', err);
-            setToken(null);
-          });
+        try {
+          // Get Firebase ID token
+          const idToken = await currentUser.getIdToken();
+          localStorage.setItem('access-token', idToken);
+          setToken(idToken);
+
+          // Save user to MongoDB (if not exists)
+          await saveUserToDB(currentUser);
+
+          // Fetch role from backend
+          const res = await axios.get(
+            `http://localhost:5000/users/${currentUser.email}`
+          );
+          setRole(res.data?.role || 'user'); // fallback role
+          console.log('✅ Role fetched:', res.data?.role);
+        } catch (err) {
+          console.error('❌ Error fetching token or role:', err);
+          setToken(null);
+          setRole('user');
+        }
       } else {
         localStorage.removeItem('access-token');
         setToken(null);
+        setRole(null);
       }
 
       setLoading(false);
@@ -75,11 +107,15 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // Optional debug log for token
-  useEffect(() => {
-    console.log('🔁 Token state changed:', token);
-  }, [token]);
+  // -------------------------
+  // Debug logs
+  // -------------------------
+  useEffect(() => console.log('🔁 Token changed:', token), [token]);
+  useEffect(() => console.log('🧩 Role changed:', role), [role]);
 
+  // -------------------------
+  // Context value
+  // -------------------------
   const authData = {
     createUser,
     user,
@@ -91,13 +127,10 @@ const AuthProvider = ({ children }) => {
     setLoading,
     gLogin,
     token,
+    role, // use this for role-based access
   };
 
-  return (
-    <AuthContext.Provider value={authData}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
