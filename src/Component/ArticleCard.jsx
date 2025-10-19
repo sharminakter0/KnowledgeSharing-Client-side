@@ -10,7 +10,7 @@ date}=article
     return (
                  
        <div className="">
-        <div className="card border shadow p-3 h-72 bg-base-100 
+        <div className="card  shadow-md p-3 h-72 bg-base-100 
          ">
   <div className="  ">
      {article.thumbnail && (

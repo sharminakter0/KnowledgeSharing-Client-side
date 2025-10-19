@@ -1,21 +1,14 @@
 import React from 'react';
-import logo from "../../assets/lottie/cENfIyCPDD.json"
+import logo from "../../assets/Logo/ThinkTroveLogo2.png"
 import { Link } from 'react-router';
-import Lottie from 'lottie-react';
+
 const KnowledgeLogo = () => {
     return (
        <Link to="/">
-       <div className='flex items-center'>
-               
-                     <Lottie
-     animationData={logo}
-     loop={true}
-     className="w-8 md:w-8 mx-auto  gap-0">
-      
-
-     </Lottie>
+       <div className='flex items-center gap-2'>
+        <img src={logo} alt="" className='size-5 md:size-7' />
                 
-                <p className='text-2xl -ml-1  font-bold text-green-400'> ThinkTrove</p>
+                <p className='text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[#0e68ee] to-[#863ef1] bg-clip-text text-transparent  transition-colors duration-300"'> ThinkTrove</p>
             </div>
         </Link>
     );

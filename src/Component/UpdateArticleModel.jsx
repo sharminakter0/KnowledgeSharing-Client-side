@@ -12,7 +12,7 @@ const UpdateArticleModel = ({article,setSelectedArticle,setMyArticles,myArticles
     const handleUpdate =(e)=>{
         e.preventDefault();
         
-        fetch(`http://localhost:3000/articles/${article._id}`,{
+        fetch(`https://knowledege-project.vercel.app/articles/${article._id}`,{
             method: 'PUT',
             headers:{'content-type':'application/json'},
             body: JSON.stringify(formData)
