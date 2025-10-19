@@ -24,6 +24,7 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import AdminRoute from "../AdminRoutes/AdminRoute";
 import ManageUsers from "../Pages/MangeUsers/ManageUsers";
 import ManageArticles from "../Pages/ManageArticles/ManageArticles";
+import QuizPage from "../Pages/Quiz/QuizPage";
 
 
 const router = createBrowserRouter([
@@ -69,7 +70,10 @@ const router = createBrowserRouter([
       element:<PrivacyPolicy></PrivacyPolicy>
     },
     
-
+   {
+    path:"/quiz",
+    element:<PrivateRouter><QuizPage/></PrivateRouter>
+  },
 
 
   
@@ -77,6 +81,7 @@ const router = createBrowserRouter([
 
 
   },
+ 
 
  {
   path: "/dashboard",

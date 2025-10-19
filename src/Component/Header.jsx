@@ -40,8 +40,10 @@ const Header = () => {
               Dashboard
             </NavLink>
           )}
+
+           <NavLink to="/quiz" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Quiz</NavLink>
           <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>About Us</NavLink>
-          <NavLink to="/term-use" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Terms of Use</NavLink>
+         
         </nav>
 
         {/* Right Side: Theme + User */}
@@ -79,7 +81,7 @@ const Header = () => {
           <NavLink to="/" className="block hover:text-purple-500">Home</NavLink>
           <NavLink to="/all-articles" className="block hover:text-purple-500">All Articles</NavLink>
           <NavLink to="/about-us" className="block hover:text-purple-500">About Us</NavLink>
-          <NavLink to="/term-use" className="block hover:text-purple-500">Terms of Use</NavLink>
+          <NavLink to="/quiz" className="block hover:text-purple-500">Quiz</NavLink>
           {user && <NavLink to="/dashboard" className="block hover:text-purple-500">Dashboard</NavLink>}
         </div>
       )}
