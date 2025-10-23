@@ -9,7 +9,7 @@ import banner1 from '../../src/assets/banner1.jpg';
 const Banner = () => {
   return (
     <div 
-      className="relative pb-16 hero mb-12  mx-auto rounded-2xl w-11/12 md:h-[380px] lg:h-[420px] mt-20 shadow-md shadow-[#275594] border border-[#5c97f1]  overflow-hidden"
+      className="relative pb-16 hero mb-12  mx-auto rounded-2xl w-11/12 md:h-[380px] lg:h-[420px] mt-18  shadow-md shadow-[#275594] border border-[#5c97f1]  overflow-hidden"
       style={{ backgroundImage: `url(${bg1})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
 

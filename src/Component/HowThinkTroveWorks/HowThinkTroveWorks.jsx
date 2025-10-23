@@ -31,9 +31,9 @@ const steps = [
 
 const HowThinkTroveWorks = () => {
   return (
-    <div className="w-11/12 mx-auto my-16">
-      <h2 className="text-4xl font-bold text-center mb-6">
-        How <span className="text-blue-600">ThinkTrove</span> Works
+    <div className="w-11/12 mx-auto mt-18 ">
+      <h2 className="text-3xl font-bold text-center mb-6">
+        How <span className="text-blue-500">ThinkTrove</span> Works
       </h2>
       <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
         ThinkTrove is a community-driven platform where knowledge flows freely.
@@ -49,7 +49,7 @@ const HowThinkTroveWorks = () => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.2, duration: 0.6 }}
             whileHover={{ scale: 1.05, rotate: 1 }}
-            className="bg-base-100 shadow-lg rounded-2xl p-6 text-center border hover:shadow-xl"
+            className="bg-base-100  rounded-2xl p-6 text-center border border-blue-300 hover:shadow-xl"
           >
             <div className="flex justify-center mb-4">{step.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
