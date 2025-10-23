@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { Bookmark } from "lucide-react";
+import { Bookmark,BookOpenText } from "lucide-react";
 
 const FeaturedArticles = ({ articles }) => {
   const featured = Array.isArray(articles) ? articles.slice(0, 8) : [];
@@ -21,7 +21,7 @@ const FeaturedArticles = ({ articles }) => {
             key={article._id}
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="bg-base-100 card shadow-md p-3 relative overflow-hidden"
+            className="bg-base-100 card p-3 relative border-1 border-blue-100 overflow-hidden"
           >
             {article.thumbnail && (
               <div className="relative">
@@ -46,7 +46,7 @@ const FeaturedArticles = ({ articles }) => {
             </p>
 
             <Link to={`/article-details/${article._id}`}>
-              <button className="btn btn-sm btn-outline btn-info mt-4">
+              <button className="btn btn-sm bg-blue-400 text-white  hover:bg-blue-400/95 mt-4">
                 Read More
               </button>
             </Link>
@@ -54,9 +54,21 @@ const FeaturedArticles = ({ articles }) => {
         ))}
       </div>
             {/* ✅ View All Button */}
-      <div className="text-center mt-6">
-        <button className="btn btn-outline btn-info">View All Articles</button>
-      </div>
+     <div className="flex justify-center items-center min-h-[20vh]"> 
+      <Link to="/all-articles">
+        <motion.button
+          whileHover={{ scale: 1.1, backgroundColor: "#3b82f6" }} // hover grow
+          whileTap={{ scale: 0.95 }} // click shrink
+          initial={{ opacity: 0, y: 30 }} // enter animation
+          animate={{ opacity: 1, y: 0 }} // visible animation
+          transition={{ duration: 0.6, type: "spring" }}
+          className="flex items-center gap-2 bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg"
+        >
+          <BookOpenText size={22} />
+          View All Articles
+        </motion.button>
+      </Link>
+    </div>
     </div>
   );
 };
