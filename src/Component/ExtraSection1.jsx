@@ -1,36 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Users } from "lucide-react";
 import Marquee from "react-fast-marquee";
-import { article } from 'framer-motion/client';
+
+
 
 
 const ExtraSection1 = () => {
-        
+  const [topUsers, setTopUsers] = useState([]);
 
-    
-    const [topUsers, setTopUsers] = useState([]);
   const [latestArticles, setLatestArticles] = useState([]);
 
-
-  // 🔹 Load all articles and compute Top Contributors
   useEffect(() => {
-    fetch('http://localhost:5000/articles')
-      .then(res => res.json())
-      .then(data => {
-        // ✅ Count articles by user
+    fetch("http://localhost:5000/articles")
+      .then((res) => res.json())
+      .then((data) => {
+        // Count articles (likes removed)
         const userMap = {};
-        data.forEach(article => {
-          const email = article.email;
-          const name = article.userName;
-          const tags = article.tags;
-          const photoURL =article.userPhotoURL;
-         
-          
-         
-
+        data.forEach((article) => {
+          const { email, userName, userPhotoURL } = article;
           if (!userMap[email]) {
-            userMap[email] = { name,tags, email,photoURL, count: 1 };
+            userMap[email] = {
+              name: userName,
+              email,
+              photoURL: userPhotoURL,
+              count: 1,
+            };
           } else {
             userMap[email].count += 1;
           }
@@ -38,65 +33,85 @@ const ExtraSection1 = () => {
 
         const contributors = Object.values(userMap)
           .sort((a, b) => b.count - a.count)
-          .slice(0, 5); // Top 5
+          .slice(0, 3);
 
         setTopUsers(contributors);
-        setLatestArticles(data.slice(-3).reverse()); // Last 5
-      });
+        setLatestArticles(data.slice(-3).reverse());
+      })
+      .catch((err) => console.error("Error fetching articles:", err));
   }, []);
 
+  return (
+    <div className="w-11/12 mx-auto mt-10">
+      {/* Top Contributors */}
+      <div className="bg-base-200 py-10 px-4 rounded-2xl text-center">
+        <h2 className="text-3xl font-bold mb-3">Top Contributors</h2>
+        <p className="text-gray-600 mb-8">
+          Meet our most active community members — the ones who make learning
+          and sharing possible every day.
+        </p>
 
-    return (
-        <div className='w-11/12 mx-auto mt-10 '>
-       {/* ✅ Top Contributors */}
-      <div className='bg-base-200 py-10 px-4 rounded-2xl '
-       
-      >
-        <h2 className="text-3xl   text-center font-bold   mb-6 " >Top Contributors</h2>
-        <p className='text-sm text-gray-600 text-center mb-6'>Meet the students who go above and beyond in sharing knowledge and helping others grow. <br />Our top contributors regularly post valuable content, answer questions, and inspire the community with their dedication and expertise.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-7 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
           {topUsers.map((user, index) => (
             <motion.div
-            
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            key={index} className="border-green-400 border shadow-md rounded p-4 text-center">
-                <img src={article.photoURL}></img>
-             
-              <h3 className="font-semibold text-blue-600">{user.name}</h3>
-              <p className="text-sm text-gray-500">{user.count} Articles</p>
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="bg-blue-50 p-6 rounded-xl shadow-sm w-64"
+            >
+              <div className="flex flex-col items-center">
+                <div className="bg-blue-500 p-4 rounded-full mb-4">
+                  <Users size={32} color="white" />
+                </div>
+                <h3 className="text-lg font-bold">{user.name}</h3>
+                <p className="text-sm text-gray-500 mt-1">
+                  {user.count} articles
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-     {/* ✅ Latest Articles */}
-      <div className='mb-10'
-      >
-        <h2 className="text-3xl text-center font-bold mb-5">Latest Articles</h2>
-        <p className='text-lg font-semibold mb-6 text-center'>Stay updated with the newest content from our community.</p>
-        <Marquee><div className="grid grid-cols-3 lg:grid-cols-3 gap-8">
-          {latestArticles.map(article => (
+      {/* Latest Articles */}
+      <div className="mt-6 mb-10">
+        <h2 className="text-3xl text-center font-bold mb-3">
+          Latest Articles
+        </h2>
+        <p className="text-gray-600 text-center mb-6">
+          Stay updated with the newest posts from our passionate community.
+        </p>
 
-            
-            <div key={article._id} className="p-3 bg-base-100  rounded-lg shadow-sm"
-            >
-
-              
-              <figure>
-                <img src={article.thumbnail || 'https://via.placeholder.com/400x200'} alt="Article" className="h-40 w-full object-cover rounded-lg" />
-              </figure>
-              <div className="card-body">
-                <h3 className="text-lg font-bold">{article.title}</h3>
-                <p className="text-sm text-gray-500">By {article.userName || 'Unknown'}</p>
-
+        <Marquee speed={50} pauseOnHover>
+          <div className="flex gap-6 px-4">
+            {latestArticles.map((article) => (
+              <div
+                key={article._id}
+                className="bg-base-100 rounded-lg shadow-md w-80 overflow-hidden"
+              >
+                <img
+                  src={
+                    article.thumbnail ||
+                    "https://via.placeholder.com/400x200?text=Article"
+                  }
+                  alt="Article"
+                  className="h-44 w-full object-cover"
+                />
+                <div className="p-4 text-left">
+                  <h3 className="text-lg font-semibold">
+                    {article.title.slice(0, 50)}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">
+                    By {article.userName || "Unknown"}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div></Marquee>
-      </div>         
-        </div>
-    );
+            ))}
+          </div>
+        </Marquee>
+      </div>
+    </div>
+  );
 };
 
 export default ExtraSection1;
