@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import {  Navigate, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { motion } from "framer-motion";
+import { GraduationCap, HeartPulse, Monitor, Palette } from "lucide-react"; // import icons
 import image1 from "../../src/assets/female-nurse-taking-care-elderly-person.jpg";
-import image2 from "../../src/assets/front-view-stacked-books-ladders-with-copy-space-education-day.jpg"
-import {motion} from "motion/react"
+
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-   const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  // Map category name to icons
+  const categoryIcons = {
+    education: <GraduationCap size={20} className="text-blue-500" />,
+    health: <HeartPulse size={20} className="text-blue-500" />,
+    lifestyle: <Palette size={20} className="text-blue-500" />,
+    tech: <Monitor size={20} className="text-blue-500" />,
+  };
 
   useEffect(() => {
     fetch('http://localhost:5000/categories/name')
@@ -13,45 +22,49 @@ const Categories = () => {
       .then(data => setCategories(data))
       .catch(err => console.error('Failed to fetch categories:', err));
   }, []);
-  console.log (categories)
-  const handleClick =(category)=>{
-  navigate(`/categorys/${category}`)
-   }
+
+  const handleClick = (category) => {
+    navigate(`/categorys/${category}`);
+  };
 
   return (
-    <div className="w-11/12 mx-auto mt-16 text-center bg-base-100 py-18  rounded-2xl px-10">
+    <div className="w-11/12 mx-auto mt-10 text-center mb-18  ">
       <h2 className="text-3xl font-bold mb-4">Browse by Category</h2>
-     <p className='text-center text-gray-500 mb-8'>Easily find the content you're looking for by exploring our organized categories. <br /> Whether it's technology, education, lifestyle, or creativity — discover articles that match your interests and needs in just a few clicks.</p>
-     <div className="flex flex-col lg:flex-row justify-between   gap-11 items-center" >
-     
+      <p className="text-center text-gray-500 mb-6">
+        Easily find the content you're looking for by exploring our organized categories. <br />
+        Whether it's technology, education, lifestyle, or creativity — discover articles that match your interests and needs in just a few clicks.
+      </p>
 
+      <div className="flex flex-col lg:flex-row justify-between gap-11 items-center">
+        {/* Left: Category Buttons */}
         <div className="flex flex-wrap justify-center gap-6">
-        {categories.map((category, idx) => (
-        //   <Link to={`/category/${category}`}
-          
-            <button onClick={()=>handleClick(category)}  key={idx} className="btn btn-outline btn-info capitalize">
-                
-                {category}</button>
-        //   </Link>
-        ))}
-      </div> 
-      {/* Right side */}
-      <div className='lg:w-2/3 flex flex-cols gap-4'>
-        <motion.img src={image1} alt="categories image"
-          animate={{
-        y:[50, 0, 50],
-        
-      }}
-      transition={{duration:7, repeat: Infinity}}
-        className='w-80  rounded-lg h-60  rounded-tl-[40px] border-green-300 border' />
-        <motion.img src={image2} alt="categories  image"  animate={{
-        x:[-100, 0, -100],
-        
-      }}
-      transition={{duration:10, delay:0, repeat: Infinity}}
-        className='w-80 h-60 rounded-lg  rounded-bl-[40px] border-green-300  border' />
+          {categories.map((category, idx) => {
+            const icon = categoryIcons[category.toLowerCase()] || null; // get icon by name
+            return (
+             <motion.button
+               whileHover={{ scale: 1.08, backgroundColor: "#e0f2fe" }}  // grows & light blue hover
+                whileTap={{ scale: 0.95 }}                                 // slight press-in effect
+               transition={{ type: "spring", stiffness: 300 }}
+              onClick={() => handleClick(category)}
+              key={idx}
+              className="flex items-center gap-2 px-6 py-3 border border-blue-400 rounded-md bg-base-100 capitalize  hover:shadow-md"
+              >{icon}{category}
+             </motion.button>
+            );
+          })}
+        </div>
+
+        {/* Right: Animated Image */}
+        <div>
+          <motion.img
+            src={image1}
+            alt="categories image"
+            animate={{ y: [40, 0, 50] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="w-95 rounded-lg h-66 rounded-tl-[40px] border-blue-400 border-2"
+          />
+        </div>
       </div>
-      </div> 
     </div>
   );
 };
