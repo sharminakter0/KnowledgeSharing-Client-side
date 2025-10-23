@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,  } from 'react';
 import { useLoaderData } from 'react-router';
+
 import ArticleCard from '../Component/ArticleCard';
+import SearchBar from '../Component/SearchBar';
 
 const Allarticles = () => {
   let articlesData = useLoaderData();
@@ -25,6 +27,7 @@ const Allarticles = () => {
           Whether you're here to learn, explore, or get inspired, our curated collection brings you
           fresh perspectives and expert insights.
         </p>
+        <SearchBar />
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filter Section */}

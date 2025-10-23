@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addNotification } from '../redux/features/notificationSlice';
+import { addArticleToHistory } from '../redux/features/historySlice'; // Add this import
 
 const ArticleCardDetails = () => {
   const { id } = useParams();
@@ -12,6 +15,7 @@ const ArticleCardDetails = () => {
   const [likes, setLikes] = useState(0);
   const [alreadyLiked, setAlreadyLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+  const dispatch = useDispatch();
  
 
 
@@ -19,8 +23,17 @@ const ArticleCardDetails = () => {
   useEffect(() => {
     fetch(`http://localhost:5000/articles/${id}`)
       .then(res => res.json())
-      .then(data => setArticle(data));
-  }, [id]);
+      .then(data => {
+        setArticle(data);
+        // Dispatch action to add article to history
+        dispatch(addArticleToHistory({
+          id: data._id, // Assuming _id is the unique identifier for the article
+          title: data.title,
+          url: `/article/${data._id}`, // Construct the URL for the article
+          thumbnail: data.thumbnail // Include thumbnail if available
+        }));
+      });
+  }, [id, dispatch]); // Add dispatch to dependency array
 
   // Fetch comments
   useEffect(() => {
@@ -83,6 +96,14 @@ useEffect(() => {
       .then(() => {
         setComments(prev => [newComment, ...prev]);
         e.target.reset();
+        // Dispatch notification
+        dispatch(addNotification({
+          id: Date.now(), // Unique ID for the notification
+          message: `New comment on "${article.title}" by ${user.displayName}`,
+          read: false,
+          timestamp: new Date().toISOString(),
+          articleId: id,
+        }));
       });
   };
 

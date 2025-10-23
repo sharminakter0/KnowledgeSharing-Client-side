@@ -6,6 +6,7 @@ import Categories from '../Component/Categories';
 import ExtraSection1 from '../Component/ExtraSection1';
 import ReviewSection from '../Component/ReviewSection/ReviewSection';
 import HowThinkTroveWorks from '../Component/HowThinkTroveWorks/HowThinkTroveWorks';
+import ThemeToggle from '../Component/ThemeToggle';
 
  
 
@@ -29,6 +30,8 @@ const Home = () => {
        <ExtraSection1></ExtraSection1>
 
        <ReviewSection></ReviewSection>
+
+       <ThemeToggle/>
        
        
        

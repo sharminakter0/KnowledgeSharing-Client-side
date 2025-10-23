@@ -1,4 +1,4 @@
-// src/Routes/AdminRoute.jsx
+
 import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Navigate } from "react-router";

@@ -1,15 +1,38 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import KnowledgeLogo from "./KnowledgeLogo/KnowledgeLogo";
+import NotificationBell from "./NotificationBell";
+import RecentlyViewed from "./RecentlyViewed";
+import { useDispatch } from 'react-redux';
+import { addNotification } from '../redux/features/notificationSlice';
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  // Dev: dispatch a test notification when the user logs in so the bell is visible
+  useEffect(() => {
+    if (user) {
+      // Only add a test notification once per session
+      const hasSeenTest = sessionStorage.getItem('seenTestNotification');
+      if (!hasSeenTest) {
+        dispatch(addNotification({
+          id: `test-${Date.now()}`,
+          title: 'Welcome back!',
+          message: 'This is a test notification. You can disable it in Header.jsx.',
+          timestamp: new Date().toISOString(),
+          read: false
+        }));
+        sessionStorage.setItem('seenTestNotification', '1');
+      }
+    }
+  }, [user, dispatch]);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 dark:text-white text-gray-800 shadow-sm px-4 sm:px-6 md:px-12">
+    <header className="fixed top-0 left-0 w-full z-50 bg-base-100 dark:bg-gray-900 dark:text-white text-blue-500 shadow-sm px-4 sm:px-6 md:px-12">
       <div className="flex items-center justify-between h-16">
         
         {/* Logo + Mobile Menu Button */}
@@ -28,7 +51,10 @@ const Header = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <KnowledgeLogo />
+
+          <div  className="hidden lg:flex">
+          <KnowledgeLogo/>
+          </div>
         </div>
 
         {/* Desktop Menu */}
@@ -36,19 +62,26 @@ const Header = () => {
           <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Home</NavLink>
           <NavLink to="/all-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>All Articles</NavLink>
           {user && (
-            <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
-              Dashboard
-            </NavLink>
+            <>
+              <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
+                Dashboard
+              </NavLink>
+              <NavLink to="/my-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
+                My Articles
+              </NavLink>
+            </>
           )}
 
            <NavLink to="/quiz" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Quiz</NavLink>
-          <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>About Us</NavLink>
+          {/* <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>About Us</NavLink> */}
          
         </nav>
 
         {/* Right Side: Theme + User */}
         <div className="flex items-center gap-4">
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
+          <RecentlyViewed /> {/* Add RecentlyViewed here */}
+          {user && <NotificationBell />}
           {user ? (
             <div className="flex items-center gap-3">
               <img
@@ -83,6 +116,7 @@ const Header = () => {
           <NavLink to="/about-us" className="block hover:text-purple-500">About Us</NavLink>
           <NavLink to="/quiz" className="block hover:text-purple-500">Quiz</NavLink>
           {user && <NavLink to="/dashboard" className="block hover:text-purple-500">Dashboard</NavLink>}
+          {user && <NavLink to="/my-articles" className="block hover:text-purple-500">My Articles</NavLink>} {/* New NavLink */}
         </div>
       )}
     </header>
