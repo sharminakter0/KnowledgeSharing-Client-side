@@ -16,13 +16,13 @@ const MyArticles = () => {
 
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  // Fetch user articles
+  // Fetch only the current user's articles
   useEffect(() => {
     if (user?.email) {
       dispatch(fetchUserArticles(user.email));
     }
 
-    // Clear on unmount
+    // Clear articles on component unmount
     return () => {
       dispatch(clearUserArticles());
     };
@@ -41,6 +41,10 @@ const MyArticles = () => {
       if (result.isConfirmed) {
         fetch(`http://localhost:5000/articles/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user?.token}` // If you use JWT auth
+          }
         })
           .then((res) => res.json())
           .then(() => {
@@ -93,11 +97,7 @@ const MyArticles = () => {
                   </td>
                   <td>{article.title}</td>
                   <td>{article.category}</td>
-                  <td>
-                    {Array.isArray(article.tags)
-                      ? article.tags.join(', ')
-                      : article.tags || '—'}
-                  </td>
+                  <td>{Array.isArray(article.tags) ? article.tags.join(', ') : article.tags || '—'}</td>
                   <td>
                     <div className="flex gap-2">
                       <button

@@ -25,6 +25,7 @@ import AdminRoute from "../AdminRoutes/AdminRoute";
 import ManageUsers from "../Pages/MangeUsers/ManageUsers";
 import ManageArticles from "../Pages/ManageArticles/ManageArticles";
 import QuizPage from "../Pages/Quiz/QuizPage";
+import HistoryPage from "./RecentlyViewed";
 
 
 const router = createBrowserRouter([
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
     path:"/quiz",
     element:<PrivateRouter><QuizPage/></PrivateRouter>
   },
+   
+  {
+    path:"/history",
+    element:<PrivateRouter><HistoryPage></HistoryPage></PrivateRouter>
+  }
 
 
   

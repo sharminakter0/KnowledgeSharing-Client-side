@@ -22,18 +22,18 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="w-9/12 mx-auto mt-15 p-6 bg-base-100 shadow-lg border rounded-lg items-center flex flex-col text-center">
+    <div className="w-9/12 mx-auto mt-15 p-6 bg-base-100  border border-blue-100 rounded-lg items-center flex flex-col text-center">
       <img
         src={user.photoURL}
         alt="User"
-        className="w-32 h-32 rounded-full border items-center"
+        className="w-32 h-32 rounded-full border border-blue-200 items-center"
       />
       <h2 className="text-2xl font-bold mt-5">{user.displayName}</h2>
       <p>{user.email}</p>
 
       <button
         onClick={() => setIsModalOpen(true)}
-        className="mt-6 btn btn-primary"
+        className="mt-6 btn bg-[#0e68ee] py-2 px-4 rounded-xl text-white "
       >
         Edit Profile
       </button>
@@ -75,7 +75,7 @@ const MyProfile = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn bg-[#0e68ee] py-2 px-4 rounded-2xl text-white  ">
                   Save Changes
                 </button>
               </div>

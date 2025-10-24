@@ -67,14 +67,14 @@ const QuizPage = () => {
 
   return (
     <div className="min-h-screen bg-base-300 flex justify-center items-start pt-20 pb-10 px-4">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 md:p-8">
+      <div className="w-full max-w-2xl bg-base-100 rounded-2xl  p-6 md:p-8">
         
         {/* Progress bar */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Knowledge Quiz</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Test Your Knowledge</h2>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -101,7 +101,7 @@ const QuizPage = () => {
                   ? isCorrect
                     ? "border-green-400 bg-green-50"
                     : "border-red-400 bg-red-50"
-                  : "border-gray-200 hover:border-purple-500 hover:bg-purple-50"
+                  : "border-gray-200 hover:border-blue-400 hover:bg-blue-50"
               }`}
             >
               {option}
@@ -135,7 +135,7 @@ const QuizPage = () => {
           <div className="mt-6 flex justify-end">
             <button
               onClick={handleNext}
-              className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+              className="bg-[#0e68ee] text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
             >
               {currentIndex === quiz.questions.length - 1 ? "Finish" : "Next Question →"}
             </button>

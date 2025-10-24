@@ -47,7 +47,7 @@ const DashboardLayout = () => {
       {/* Page Content */}
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="w-full navbar bg-blue-950 text-white px-4 lg:px-8 shadow">
+        <div className="w-full navbar bg-base-300 text-blue-600 px-4 lg:px-8 shadow">
           <div className="flex-none lg:hidden">
             <label htmlFor="dashboard-drawer" className="btn btn-square btn-ghost text-white">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
@@ -61,7 +61,7 @@ const DashboardLayout = () => {
           {/* Logo */}
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <Lottie animationData={logo} loop={true} className="w-8 md:w-8" />
+              
               <h2 className="font-bold text-xl md:text-2xl">ThinkTrove</h2>
             </div>
           </div>
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
             {user && (
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full border-2 border-green-400">
+                  <div className="w-10 rounded-full border-2 border-blue-300">
                     <img src={user.photoURL} alt="user" />
                   </div>
                 </label>
@@ -95,7 +95,7 @@ const DashboardLayout = () => {
       </div>
 
       {/* Sidebar */}
-      <div className="drawer-side bg-blue-950 text-white">
+      <div className="drawer-side bg-base-300 text-blue-600 font-semibold">
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
         <div>
           <h2 className="text-2xl ml-7 mt-6">Dashboard</h2>

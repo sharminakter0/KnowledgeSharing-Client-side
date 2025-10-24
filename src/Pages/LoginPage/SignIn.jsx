@@ -83,13 +83,7 @@ const handleGooleLogin =()=>{
     return (
         <div className='mt-10'>
               <div className='place-content-center text-center items-center-safe gap-0'>
-               <Lottie
-     animationData={logo}
-     loop={true}
-     className="w-20 md:w-25 mx-auto  gap-0 -mb-7">
-      
-
-     </Lottie>
+            
             </div>
         <form onSubmit={handleLogin} className=''>
              <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl hover:shadow-3xl transition-shadow duration-300 border border-opacity-10 border-white  mx-auto my-10 ">

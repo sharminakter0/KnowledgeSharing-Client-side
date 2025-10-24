@@ -60,19 +60,22 @@ const Header = () => {
         {/* Desktop Menu */}
         <nav className="hidden lg:flex space-x-6 text-sm">
           <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Home</NavLink>
-          <NavLink to="/all-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>All Articles</NavLink>
+          <NavLink to="/all-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>All Articles</NavLink>
           {user && (
             <>
-              <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
-                Dashboard
-              </NavLink>
+             
               {/* <NavLink to="/my-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
                 My Articles
               </NavLink> */}
             </>
           )}
 
-           <NavLink to="/quiz" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Quiz</NavLink>
+           <NavLink to="/quiz" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>Quiz</NavLink>
+            <NavLink to="/history" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>History</NavLink>
+
+             <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>
+                Dashboard
+              </NavLink>
           {/* <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>About Us</NavLink> */}
          
         </nav>
@@ -80,7 +83,7 @@ const Header = () => {
         {/* Right Side: Theme + User */}
         <div className="flex items-center gap-4">
           {/* <ThemeToggle /> */}
-          <RecentlyViewed /> {/* Add RecentlyViewed here */}
+          {/* <RecentlyViewed /> Add RecentlyViewed here */}
           {user && <NotificationBell />}
           {user ? (
             <div className="flex items-center gap-3">
@@ -115,6 +118,8 @@ const Header = () => {
           <NavLink to="/all-articles" className="block hover:text-purple-500">All Articles</NavLink>
           <NavLink to="/about-us" className="block hover:text-purple-500">About Us</NavLink>
           <NavLink to="/quiz" className="block hover:text-purple-500">Quiz</NavLink>
+            <NavLink to="/history" className="block hover:text-purple-500">History</NavLink>
+          
           {user && <NavLink to="/dashboard" className="block hover:text-purple-500">Dashboard</NavLink>}
           {/* {user && <NavLink to="/my-articles" className="block hover:text-purple-500">My Articles</NavLink>} New NavLink */}
         </div>

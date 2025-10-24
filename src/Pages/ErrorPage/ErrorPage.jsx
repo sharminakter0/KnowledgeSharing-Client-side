@@ -15,7 +15,7 @@ const ErrorPage = () => {
             </Lottie>   
        
       <p className="text-xl text-gray-700 mb-6">Oops! The page you're looking for doesn't exist.</p>
-      <Link to="/" className="btn btn-success">Back to Home</Link>    
+      <Link to="/" className="btn bg-[#0e68ee] py-2 px-4 rounded-2xl text-white ">Back to Home</Link>    
         </div>
     );
 };

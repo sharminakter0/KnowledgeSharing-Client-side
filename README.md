@@ -32,6 +32,13 @@ The goal of this platform is to encourage users to share knowledge through artic
 -  **404 Page** with custom design
 -  **Animations** using Framer Motion or AOS
 
+<!-- Add new Features -->
+- **Notification**
+- **History**
+- **Quiz**
+- **Add Roles in Dashboard**
+
+
 ---
 
 ## 🛠 Tech Stack
@@ -42,6 +49,7 @@ The goal of this platform is to encourage users to share knowledge through artic
 - **Tailwind CSS**
 - **Firebase Auth**
 - **Framer Motion**
+- **Redux**          
 
 ### 🧩 Backend
 - **Node.js**
@@ -56,6 +64,6 @@ The goal of this platform is to encourage users to share knowledge through artic
 
 ### 🔹 Client-side
 ```bash
-npm install react react-dom react-router-dom
+npm install react  react-router
 npm install firebase  framer-motion
 

@@ -57,7 +57,7 @@ const ExtraSection1 = () => {
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="bg-blue-50 p-6 rounded-xl shadow-sm w-64"
+              className="bg-base-100 p-6 rounded-xl shadow-sm w-64"
             >
               <div className="flex flex-col items-center">
                 <div className="bg-blue-500 p-4 rounded-full mb-4">
