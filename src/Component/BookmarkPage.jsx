@@ -8,7 +8,7 @@ const BookmarkPage = () => {
 
   useEffect(() => {
     if (user?.token) {
-      fetch("http://localhost:5000/bookmarks", {
+      fetch("https://knowledege-project.vercel.app/bookmarks", {
         headers: {
           authorization: `Bearer ${user.token}`,
         },

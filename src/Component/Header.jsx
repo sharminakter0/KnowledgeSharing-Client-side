@@ -22,7 +22,7 @@ const Header = () => {
         dispatch(addNotification({
           id: `test-${Date.now()}`,
           title: 'Welcome back!',
-          message: 'This is a test notification. You can disable it in Header.jsx.',
+         
           timestamp: new Date().toISOString(),
           read: false
         }));

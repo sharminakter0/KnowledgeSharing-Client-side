@@ -110,9 +110,7 @@ const RagisterPage = () => {
     <>
        
 
-    <div className='my-10  
-    
-    items-center-safe  justify-center gap-4 '>
+    <div className='my-10 border border-blue-300 items-center-safe  justify-center gap-4 '>
 
         <div className='place-content-center text-center items-center-safe gap-0'>
                      <Lottie
@@ -127,13 +125,13 @@ const RagisterPage = () => {
      <div className="">
       
     <form onSubmit={handleRegister}>
-      <div className="card bg-base-100 max-w-md mx-auto   shadow-2xl   pb-6 px-4">
+      <div className="card bg-base-100 max-w-md mx-auto     pb-6 px-4">
         
         <div className="card-body p-8 ">
           <div className="flex justify-center">
           <BackHomebutton></BackHomebutton></div>
           
-          <h2 className="text-3xl font-bold text-center mb-5 text-blue-950">
+          <h2 className="text-3xl font-bold text-center mb-5 text-blue-500">
             Create An Account
           </h2>
           
@@ -212,7 +210,7 @@ const RagisterPage = () => {
 
             <div className="form-control">
               <label className="label cursor-pointer">
-                <input type="checkbox" className="checkbox checkbox-info  border-[#33ff56] size-5" required />
+                <input type="checkbox" className="checkbox checkbox-info  border-[#4133ff] size-5" required />
                 <span className="label-text ml-2 text-sm">
                   I agree to the <Link  to="/term-use" className="
                  text-gray-700 hover:text-[#33f6ff]">Terms of Service</Link> and{' '}
@@ -221,7 +219,7 @@ const RagisterPage = () => {
               </label>
             </div>
 
-            <button type="submit" className="btn bg-blue-950 text-white  mt-3 px-36">
+            <button type="submit" className="btn bg-blue-600 text-white  mt-3 px-36">
               Register
             </button>
           </fieldset>
@@ -236,7 +234,7 @@ const RagisterPage = () => {
 
           <p className="text-center text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/auth/sign-in" className="link link-primary   text-blue-950 hover:text-[#33f6ff] font-medium">
+            <Link to="/auth/sign-in" className="link link-primary   text-blue-600 hover:text-[#33f6ff] font-medium">
              Login
             </Link>
           </p>

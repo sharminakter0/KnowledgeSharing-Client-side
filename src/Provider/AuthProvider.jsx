@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
     };
 
     try {
-      await axios.post('http://localhost:5000/users', userData);
+      await axios.post('https://knowledege-project.vercel.app/users', userData);
       console.log('✅ User saved to DB');
     } catch (err) {
       console.error('❌ Failed to save user:', err);
@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
 
           // Fetch role from backend
           const res = await axios.get(
-            `http://localhost:5000/users/${currentUser.email}`
+            `https://knowledege-project.vercel.app/users/${currentUser.email}`
           );
           setRole(res.data?.role || 'user'); // fallback role
           console.log('✅ Role fetched:', res.data?.role);

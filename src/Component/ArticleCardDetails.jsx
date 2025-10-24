@@ -21,7 +21,7 @@ const ArticleCardDetails = () => {
 
   // Fetch article info
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/${id}`)
+    fetch(`https://knowledege-project.vercel.app/articles/${id}`)
       .then(res => res.json())
       .then(data => {
         setArticle(data);
@@ -37,7 +37,7 @@ const ArticleCardDetails = () => {
 
   // Fetch comments
   useEffect(() => {
-    fetch(`http://localhost:5000/comments/${id}`)
+    fetch(`https://knowledege-project.vercel.app/comments/${id}`)
       .then(res => res.json())
       .then(data => setComments(data));
   }, [id]);
@@ -46,7 +46,7 @@ const ArticleCardDetails = () => {
 
 useEffect(() => {
   if (user?.email) {
-    fetch(`http://localhost:5000/likes/${id}?userEmail=${user.email}`)
+    fetch(`https://knowledege-project.vercel.app/likes/${id}?userEmail=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setAlreadyLiked(data.userLiked);
@@ -54,7 +54,7 @@ useEffect(() => {
       });
   } else {
     // If user not logged in, just fetch total likes
-    fetch(`http://localhost:5000/likes/${id}`)
+    fetch(`https://knowledege-project.vercel.app/likes/${id}`)
       .then(res => res.json())
       .then(data => setLikes(data.totalLikes));
   }
@@ -62,7 +62,7 @@ useEffect(() => {
 
    useEffect(() => {
   if (user?.email) {
-    fetch(`http://localhost:5000/bookmarks`, {
+    fetch(`https://knowledege-project.vercel.app/bookmarks`, {
       headers: { authorization: `Bearer ${user.token}` } // your Firebase token
     })
       .then(res => res.json())
@@ -87,7 +87,7 @@ useEffect(() => {
       timestamp: new Date(),
     };
 
-    fetch(`http://localhost:5000/comments`, {
+    fetch(`https://knowledege-project.vercel.app/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -110,7 +110,7 @@ useEffect(() => {
     const handleLike = () => {
      if (!alreadyLiked) {
     // Add like
-    fetch(`http://localhost:5000/likes`, {
+    fetch(`https://knowledege-project.vercel.app/likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -128,7 +128,7 @@ useEffect(() => {
       });
   } else {
     // Remove like
-    fetch(`http://localhost:5000/likes`, {
+    fetch(`https://knowledege-project.vercel.app/likes`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -148,7 +148,7 @@ useEffect(() => {
 const handleBookmark = () => {
   if (!bookmarked) {
     // Save bookmark
-    fetch("http://localhost:5000/bookmarks", {
+    fetch("https://knowledege-project.vercel.app/bookmarks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -167,7 +167,7 @@ const handleBookmark = () => {
       });
   } else {
     // Remove bookmark
-    fetch(`http://localhost:5000/bookmarks/${id}`, {
+    fetch(`https://knowledege-project.vercel.app/bookmarks/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${user.token}`,
@@ -191,7 +191,7 @@ const handleBookmark = () => {
       
       {/* LEFT SIDE - ARTICLE DETAILS */}
       <div className="lg:col-span-2 mt-10  bg-base-100 px-6 py-6   rounded-lg shadow-md">
-        <h1 className='text-center mb-5 text-4xl font-bold text-blue-900'>
+        <h1 className='text-center mb-5 text-4xl font-bold text-blue-500'>
           {article.title || "Article Card Details"}
         </h1>
         {article.thumbnail && (
@@ -216,7 +216,7 @@ const handleBookmark = () => {
 >
   {alreadyLiked ? `❤️liked (${likes})` : ` Like (${likes})`}
 </button>
-          <span className="border px-2 py-2 border-green-500 rounded">
+          <span className="border px-2 py-2 border-blue-500 rounded">
             💬 Comments ({comments.length})
           </span>
 
@@ -241,7 +241,7 @@ const handleBookmark = () => {
               required
               placeholder="Write a comment..."
             ></textarea>
-            <button type="submit" className="btn btn-success mt-2 w-full">
+            <button type="submit" className="btn bg-blue-500 px-4 py-3 rounded-2xl mt-2 w-full">
               Post Comment
             </button>
           </form>

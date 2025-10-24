@@ -39,7 +39,7 @@ const MyArticles = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/articles/${id}`, {
+        fetch(`https://knowledege-project.vercel.app/articles/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

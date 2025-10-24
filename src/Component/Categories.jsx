@@ -17,7 +17,7 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/categories/name')
+    fetch('https://knowledege-project.vercel.app/categories/name')
       .then(res => res.json())
       .then(data => setCategories(data))
       .catch(err => console.error('Failed to fetch categories:', err));

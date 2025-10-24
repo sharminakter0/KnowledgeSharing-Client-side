@@ -5,7 +5,7 @@ export const fetchUserArticles = createAsyncThunk(
   'userArticles/fetchUserArticles',
   async (userEmail, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:5000/articles?userEmail=${userEmail}`);
+      const response = await fetch(`https://knowledege-project.vercel.app/articles?userEmail=${userEmail}`);
       if (!response.ok) {
         throw new Error('Failed to fetch user articles');
       }
