@@ -21,7 +21,7 @@ const ArticleCardDetails = () => {
 
   // Fetch article info
   useEffect(() => {
-    fetch(`https://knowledege-project.vercel.app/articles/${id}`)
+    fetch(`http://localhost:5000/articles/${id}`)
       .then(res => res.json())
       .then(data => {
         setArticle(data);
@@ -37,7 +37,7 @@ const ArticleCardDetails = () => {
 
   // Fetch comments
   useEffect(() => {
-    fetch(`https://knowledege-project.vercel.app/comments/${id}`)
+    fetch(`http://localhost:5000/comments/${id}`)
       .then(res => res.json())
       .then(data => setComments(data));
   }, [id]);
@@ -46,7 +46,7 @@ const ArticleCardDetails = () => {
 
 useEffect(() => {
   if (user?.email) {
-    fetch(`https://knowledege-project.vercel.app/likes/${id}?userEmail=${user.email}`)
+    fetch(`http://localhost:5000/likes/${id}?userEmail=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setAlreadyLiked(data.userLiked);
@@ -54,7 +54,7 @@ useEffect(() => {
       });
   } else {
     // If user not logged in, just fetch total likes
-    fetch(`https://knowledege-project.vercel.app/likes/${id}`)
+    fetch(`http://localhost:5000/likes/${id}`)
       .then(res => res.json())
       .then(data => setLikes(data.totalLikes));
   }
@@ -62,7 +62,7 @@ useEffect(() => {
 
    useEffect(() => {
   if (user?.email) {
-    fetch(`https://knowledege-project.vercel.app/bookmarks`, {
+    fetch(`http://localhost:5000/bookmarks`, {
       headers: { authorization: `Bearer ${user.token}` } // your Firebase token
     })
       .then(res => res.json())
@@ -87,7 +87,7 @@ useEffect(() => {
       timestamp: new Date(),
     };
 
-    fetch(`https://knowledege-project.vercel.app/comments`, {
+    fetch(`http://localhost:5000/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -110,7 +110,7 @@ useEffect(() => {
     const handleLike = () => {
      if (!alreadyLiked) {
     // Add like
-    fetch(`https://knowledege-project.vercel.app/likes`, {
+    fetch(`http://localhost:5000/likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -128,7 +128,7 @@ useEffect(() => {
       });
   } else {
     // Remove like
-    fetch(`https://knowledege-project.vercel.app/likes`, {
+    fetch(`http://localhost:5000/likes`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -148,7 +148,7 @@ useEffect(() => {
 const handleBookmark = () => {
   if (!bookmarked) {
     // Save bookmark
-    fetch("https://knowledege-project.vercel.app/bookmarks", {
+    fetch("http://localhost:5000/bookmarks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -167,7 +167,7 @@ const handleBookmark = () => {
       });
   } else {
     // Remove bookmark
-    fetch(`https://knowledege-project.vercel.app/bookmarks/${id}`, {
+    fetch(`http://localhost:5000/bookmarks/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${user.token}`,

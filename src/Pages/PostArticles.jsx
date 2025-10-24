@@ -20,7 +20,7 @@ const PostArticles = () => {
     const token = localStorage.getItem('access-token');
 
     try {
-      const res = await fetch('https://knowledege-project.vercel.app/articles', {
+      const res = await fetch('http://localhost:5000/articles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ const PostArticles = () => {
 
           <input
             type='submit'
-            className='btn bg-blue-950 text-white mt-7 w-full font-bold'
+            className='btn bg-blue-600 hover:bg-blue-700 text-white mt-7 w-full font-bold'
             value='Post Articles'
           />
         </form>

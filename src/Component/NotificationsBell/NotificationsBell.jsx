@@ -13,7 +13,7 @@ const NotificationsBell = ({ userEmail }) => {
 
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get(`https://knowledege-project.vercel.app/notifications/${userEmail}`);
+        const res = await axios.get(`http://localhost:5000/notifications/${userEmail}`);
         setNotifications(res.data || []);
       } catch (err) {
         console.error("❌ Failed to fetch notifications:", err);

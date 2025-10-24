@@ -10,7 +10,7 @@ const ManageUsers = () => {
   // Fetch all users
   useEffect(() => {
     axios
-      .get("https://knowledege-project.vercel.app/users")
+      .get("http://localhost:5000/users")
       .then((res) => {
         setUsers(res.data);
         setLoading(false);
@@ -24,7 +24,7 @@ const ManageUsers = () => {
   // Handle role update
   const handleMakeAdmin = async (id) => {
     try {
-      const res = await axios.patch(`https://knowledege-project.vercel.app/users/${id}`, {
+      const res = await axios.patch(`http://localhost:5000/users/${id}`, {
         role: "admin",
       });
       if (res.data.modifiedCount > 0) {
@@ -55,7 +55,7 @@ const ManageUsers = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await axios.delete(`https://knowledege-project.vercel.app/users/${id}`);
+        const res = await axios.delete(`http://localhost:5000/users/${id}`);
         if (res.data.deletedCount > 0) {
           setUsers(users.filter((user) => user._id !== id));
           Swal.fire("Deleted!", "User has been deleted.", "success");

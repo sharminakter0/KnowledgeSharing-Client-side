@@ -15,7 +15,7 @@ const QuizPage = () => {
  useEffect(() => {
   const fetchQuiz = async () => {
     try {
-      const res = await axios.get("https://knowledege-project.vercel.app/quizzes");
+      const res = await axios.get("http://localhost:5000/quizzes");
 
       // ✅ Merge all questions into one array
       const allQuestions = res.data.flatMap((quiz) => quiz.questions);

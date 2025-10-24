@@ -5,28 +5,30 @@ import { ThemeToggle } from "./ThemeToggle";
 import KnowledgeLogo from "./KnowledgeLogo/KnowledgeLogo";
 import NotificationBell from "./NotificationBell";
 import RecentlyViewed from "./RecentlyViewed";
-import { useDispatch } from 'react-redux';
-import { addNotification } from '../redux/features/notificationSlice';
+import { useDispatch } from "react-redux";
+import { addNotification } from "../redux/features/notificationSlice";
+
+// 🧩 Lucide Icons
+import { Home, FileText, BookOpen, History, LayoutDashboard, LogOut, LogIn } from "lucide-react";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
 
-  // Dev: dispatch a test notification when the user logs in so the bell is visible
   useEffect(() => {
     if (user) {
-      // Only add a test notification once per session
-      const hasSeenTest = sessionStorage.getItem('seenTestNotification');
+      const hasSeenTest = sessionStorage.getItem("seenTestNotification");
       if (!hasSeenTest) {
-        dispatch(addNotification({
-          id: `test-${Date.now()}`,
-          title: 'Welcome back!',
-         
-          timestamp: new Date().toISOString(),
-          read: false
-        }));
-        sessionStorage.setItem('seenTestNotification', '1');
+        dispatch(
+          addNotification({
+            id: `test-${Date.now()}`,
+            title: "Welcome back!",
+            timestamp: new Date().toISOString(),
+            read: false,
+          })
+        );
+        sessionStorage.setItem("seenTestNotification", "1");
       }
     }
   }, [user, dispatch]);
@@ -34,7 +36,6 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-base-100 dark:bg-gray-900 dark:text-white text-blue-500 shadow-sm px-4 sm:px-6 md:px-12">
       <div className="flex items-center justify-between h-16">
-        
         {/* Logo + Mobile Menu Button */}
         <div className="flex items-center gap-2">
           <button
@@ -48,42 +49,70 @@ const Header = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
 
-          <div  className="hidden lg:flex">
-          <KnowledgeLogo/>
+          <div className="hidden lg:flex">
+            <KnowledgeLogo />
           </div>
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex space-x-6 text-sm">
-          <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>Home</NavLink>
-          <NavLink to="/all-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>All Articles</NavLink>
-          {user && (
-            <>
-             
-              {/* <NavLink to="/my-articles" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>
-                My Articles
-              </NavLink> */}
-            </>
-          )}
+        <nav className="hidden lg:flex space-x-6 text-sm items-center">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `flex items-center gap-1 ${isActive ? "text-blue-700 underline" : "hover:text-blue-800"}`
+            }
+          >
+            <Home size={14} /> Home
+          </NavLink>
 
-           <NavLink to="/quiz" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>Quiz</NavLink>
-            <NavLink to="/history" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>History</NavLink>
+          <NavLink
+            to="/all-articles"
+            className={({ isActive }) =>
+              `flex items-center gap-1 ${isActive ? "text-blue-700 underline" : "hover:text-blue-800"}`
+            }
+          >
+            <FileText size={14} /> All Articles
+          </NavLink>
 
-             <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-blue-800"}>
-                Dashboard
-              </NavLink>
-          {/* <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-blue-600 underline" : "hover:text-purple-500"}>About Us</NavLink> */}
-         
+          <NavLink
+            to="/quiz"
+            className={({ isActive }) =>
+              `flex items-center gap-1 ${isActive ? "text-blue-700 underline" : "hover:text-blue-800"}`
+            }
+          >
+            <BookOpen size={14} /> Quiz
+          </NavLink>
+
+          <NavLink
+            to="/history"
+            className={({ isActive }) =>
+              `flex items-center gap-1 ${isActive ? "text-blue-700 underline" : "hover:text-blue-800"}`
+            }
+          >
+            <History size={14} /> History
+          </NavLink>
+
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              `flex items-center gap-1 ${isActive ? "text-blue-600 underline" : "hover:text-blue-800"}`
+            }
+          >
+            <LayoutDashboard size={14} /> Dashboard
+          </NavLink>
         </nav>
 
         {/* Right Side: Theme + User */}
         <div className="flex items-center gap-4">
-          {/* <ThemeToggle /> */}
-          {/* <RecentlyViewed /> Add RecentlyViewed here */}
           {user && <NotificationBell />}
           {user ? (
             <div className="flex items-center gap-3">
@@ -95,17 +124,17 @@ const Header = () => {
               />
               <button
                 onClick={logout}
-                className="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition"
+                className="flex items-center gap-1 px-4 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition"
               >
-                Logout
+                <LogOut size={14} /> Logout
               </button>
             </div>
           ) : (
             <NavLink
               to="/auth/sign-in"
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+              className="flex items-center gap-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
             >
-              Sign In
+              <LogIn size={18} /> Sign In
             </NavLink>
           )}
         </div>
@@ -114,14 +143,23 @@ const Header = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="lg:hidden mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 space-y-3">
-          <NavLink to="/" className="block hover:text-purple-500">Home</NavLink>
-          <NavLink to="/all-articles" className="block hover:text-purple-500">All Articles</NavLink>
-          <NavLink to="/about-us" className="block hover:text-purple-500">About Us</NavLink>
-          <NavLink to="/quiz" className="block hover:text-purple-500">Quiz</NavLink>
-            <NavLink to="/history" className="block hover:text-purple-500">History</NavLink>
-          
-          {user && <NavLink to="/dashboard" className="block hover:text-purple-500">Dashboard</NavLink>}
-          {/* {user && <NavLink to="/my-articles" className="block hover:text-purple-500">My Articles</NavLink>} New NavLink */}
+          <NavLink to="/" className="flex items-center gap-2 hover:text-blue-600">
+            <Home size={18} /> Home
+          </NavLink>
+          <NavLink to="/all-articles" className="flex items-center gap-2 hover:text-blue-600">
+            <FileText size={18} /> All Articles
+          </NavLink>
+          <NavLink to="/quiz" className="flex items-center gap-2 hover:text-blue-600">
+            <BookOpen size={18} /> Quiz
+          </NavLink>
+          <NavLink to="/history" className="flex items-center gap-2 hover:text-blue-600">
+            <History size={18} /> History
+          </NavLink>
+          {user && (
+            <NavLink to="/dashboard" className="flex items-center gap-2 hover:text-blue-600">
+              <LayoutDashboard size={18} /> Dashboard
+            </NavLink>
+          )}
         </div>
       )}
     </header>
