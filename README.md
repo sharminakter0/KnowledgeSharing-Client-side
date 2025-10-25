@@ -18,6 +18,7 @@ The goal of this platform is to encourage users to share knowledge through artic
 
 ---  
 
+
 ## Key Features
 
 - **Navigation Bar** with conditional links based on login status
@@ -42,7 +43,8 @@ The goal of this platform is to encourage users to share knowledge through artic
 - **Manage Articles- admin dashboard**
 - **Polishing**
 
-
+ Admin email: admin1@gmail.com
+ Admin Pass :Admin@1234
 ---
 
 ## 🛠 Tech Stack
