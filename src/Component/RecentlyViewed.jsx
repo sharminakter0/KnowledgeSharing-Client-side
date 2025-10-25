@@ -14,14 +14,14 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="min-h-screen to-blue-100 dark:from-gray-900 dark:to-gray-800 pb-10 pt-15 px-6 mt-10">
+    <div className="min-h-screen dark:from-gray-900 dark:to-gray-800 pb-10 pt-15 px-6 mt-10">
       <div className="max-w-5xl mx-auto bg-base-100 dark:bg-gray-900 rounded-2xl p-6">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+        <h1 className="text-3xl font-bold  dark:text-white mb-6 text-center">
           Recently Viewed Articles
         </h1>
 
         {articles.length === 0 ? (
-          <p className="text-center text-gray-600 dark:text-gray-400">
+          <p className="text-center text-gray-500 dark:text-gray-400">
             You haven’t viewed any articles yet.
           </p>
         ) : (

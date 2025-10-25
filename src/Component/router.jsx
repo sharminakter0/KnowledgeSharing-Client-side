@@ -36,14 +36,14 @@ const router = createBrowserRouter([
    children:[
     { 
       index:true, 
-      loader:()=>fetch('http://localhost:5000/articles'),
+      loader:()=>fetch('https://knowledege-project.vercel.app/articles'),
       Component:Home
 
     } ,
      
     {
       path:"/all-articles",
-      loader:()=>fetch("http://localhost:5000/articles"),
+      loader:()=>fetch("https://knowledege-project.vercel.app/articles"),
       element:<Allarticles></Allarticles>
     },
    {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
    {
     path:"/categorys/:category",
     element:<CategoriesPage></CategoriesPage>,
-    loader:({params})=>fetch(`http://localhost:5000/articles?category=${params.category}`)
+    loader:({params})=>fetch(`https://knowledege-project.vercel.app/articles?category=${params.category}`)
    }
     ,
   
@@ -85,6 +85,10 @@ const router = createBrowserRouter([
   {
     path:"/history",
     element:<PrivateRouter><HistoryPage></HistoryPage></PrivateRouter>
+  },
+  {
+    path:"/post-articles",
+    element:<PrivateRouter><PostArticles></PostArticles></PrivateRouter>
   }
 
 

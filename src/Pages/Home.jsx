@@ -33,7 +33,7 @@ const Home = () => {
        <ReviewSection></ReviewSection>
        <LearningJourneyCTA></LearningJourneyCTA>
 
-       <ThemeToggle/>
+       
        
        
        

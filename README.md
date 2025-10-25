@@ -12,11 +12,11 @@ The goal of this platform is to encourage users to share knowledge through artic
 
 ## 🌐 Live URL
 
- [Live Site Link]()  
- [Client Repository](https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-sharminakter0)  
- [Server Repository](https://github.com/Programming-Hero-Web-Course4/b11a11-server-side-sharminakter0)
+ [Live Site Link](https://assi11-knowledge-sharing.web.app)  
+ [Client Repository](https://github.com/sharminakter0/KnowledgeSharing-Client-side.git)  
+ [Server Repository](https://github.com/sharminakter0/KnowledgeSharing-Server-site.git)
 
----
+---  
 
 ## Key Features
 
@@ -37,6 +37,10 @@ The goal of this platform is to encourage users to share knowledge through artic
 - **History**
 - **Quiz**
 - **Add Roles in Dashboard**
+- **Add new Technology**
+- **Manage User-Admin Dashboard**
+- **Manage Articles- admin dashboard**
+- **Polishing**
 
 
 ---
@@ -66,4 +70,5 @@ The goal of this platform is to encourage users to share knowledge through artic
 ```bash
 npm install react  react-router
 npm install firebase  framer-motion
+
 

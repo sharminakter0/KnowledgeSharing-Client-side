@@ -11,7 +11,7 @@ const ManageArticles = () => {
   // Fetch all articles
   const fetchArticles = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/articles", {
+      const res = await axios.get("https://knowledege-project.vercel.app/articles", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setArticles(res.data);
@@ -34,7 +34,7 @@ const ManageArticles = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/articles/${id}`, {
+      await axios.delete(`https://knowledege-project.vercel.app/articles/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Article deleted successfully");

@@ -15,13 +15,13 @@ const QuizPage = () => {
  useEffect(() => {
   const fetchQuiz = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/quizzes");
+      const res = await axios.get("https://knowledege-project.vercel.app/quizzes");
 
       // ✅ Merge all questions into one array
       const allQuestions = res.data.flatMap((quiz) => quiz.questions);
 
       // ✅ Pick first 10 questions (or random 10)
-      const selectedQuestions = allQuestions.slice(0, 7);
+      const selectedQuestions = allQuestions.slice(0, 10);
 
       // ✅ Create a single quiz object
       const mergedQuiz = {
@@ -71,7 +71,7 @@ const QuizPage = () => {
         
         {/* Progress bar */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Test Your Knowledge</h2>
+          <h2 className="text-2xl font-bold  mb-2">Test Your Knowledge</h2>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
@@ -84,7 +84,7 @@ const QuizPage = () => {
         </div>
 
         {/* Question */}
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <h3 className="text-lg font-semibold  mb-4">
           {currentQuestion.questionText}
         </h3>
 
@@ -99,9 +99,9 @@ const QuizPage = () => {
               className={`w-full text-left px-4 py-3 rounded-lg border transition ${
                 selectedOption === option
                   ? isCorrect
-                    ? "border-green-400 bg-green-50"
-                    : "border-red-400 bg-red-50"
-                  : "border-gray-200 hover:border-blue-400 hover:bg-blue-50"
+                    ? "border-green-400 bg-green-50 text-green-500"
+                    : "border-red-400 bg-red-50 text-red-500"
+                  : "border-gray-200 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-500"
               }`}
             >
               {option}

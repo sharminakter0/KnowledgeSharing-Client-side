@@ -45,7 +45,7 @@ const Footer = () => {
 
         {/* ===== Platform ===== */}
         <div>
-          <h3 className="font-semibold text-gray-900 mb-3">Platform</h3>
+          <h3 className="font-semibold text-gray-500 mb-3">Platform</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
             <li><Link to="/all-articles" className="hover:text-blue-600">Articles</Link></li>
@@ -55,7 +55,7 @@ const Footer = () => {
 
         {/* ===== Company ===== */}
         <div>
-          <h3 className="font-semibold text-gray-900 mb-3">Company</h3>
+          <h3 className="font-semibold text-gray-500 mb-3">Company</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/about-us" className="hover:text-blue-600">About Us</Link></li>
             <li><Link to="/contact-us" className="hover:text-blue-600">Contact</Link></li>
@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* ===== Resources ===== */}
         <div>
-          <h3 className="font-semibold text-gray-900 mb-3">Resources</h3>
+          <h3 className="font-semibold text-gray-500 mb-3">Resources</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/help" className="hover:text-blue-600">Help Center</Link></li>
             <li><Link to="/privacy" className="hover:text-blue-600">Privacy Policy</Link></li>

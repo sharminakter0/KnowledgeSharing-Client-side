@@ -12,7 +12,7 @@ const ExtraSection1 = () => {
   const [latestArticles, setLatestArticles] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/articles")
+    fetch("https://knowledege-project.vercel.app/articles")
       .then((res) => res.json())
       .then((data) => {
         // Count articles (likes removed)

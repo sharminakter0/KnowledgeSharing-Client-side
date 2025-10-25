@@ -14,14 +14,14 @@ const ArticleCardDetails = () => {
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState(0);
   const [alreadyLiked, setAlreadyLiked] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
+  // const [bookmarked, setBookmarked] = useState(false);
   const dispatch = useDispatch();
  
 
 
   // Fetch article info
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/${id}`)
+    fetch(`https://knowledege-project.vercel.app/articles/${id}`)
       .then(res => res.json())
       .then(data => {
         setArticle(data);
@@ -37,7 +37,7 @@ const ArticleCardDetails = () => {
 
   // Fetch comments
   useEffect(() => {
-    fetch(`http://localhost:5000/comments/${id}`)
+    fetch(`https://knowledege-project.vercel.app/comments/${id}`)
       .then(res => res.json())
       .then(data => setComments(data));
   }, [id]);
@@ -46,7 +46,7 @@ const ArticleCardDetails = () => {
 
 useEffect(() => {
   if (user?.email) {
-    fetch(`http://localhost:5000/likes/${id}?userEmail=${user.email}`)
+    fetch(`https://knowledege-project.vercel.app/likes/${id}?userEmail=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setAlreadyLiked(data.userLiked);
@@ -54,24 +54,24 @@ useEffect(() => {
       });
   } else {
     // If user not logged in, just fetch total likes
-    fetch(`http://localhost:5000/likes/${id}`)
+    fetch(`https://knowledege-project.vercel.app/likes/${id}`)
       .then(res => res.json())
       .then(data => setLikes(data.totalLikes));
   }
 }, [user, id]);
 
-   useEffect(() => {
-  if (user?.email) {
-    fetch(`http://localhost:5000/bookmarks`, {
-      headers: { authorization: `Bearer ${user.token}` } // your Firebase token
-    })
-      .then(res => res.json())
-      .then(data => {
-        const isBookmarked = data.some(article => article._id === id);
-        setBookmarked(isBookmarked);
-      });
-  }
-}, [user, id]);
+//    useEffect(() => {
+//   if (user?.email) {
+//     fetch(`https://knowledege-project.vercel.app/bookmarks`, {
+//       headers: { authorization: `Bearer ${user.token}` } // your Firebase token
+//     })
+//       .then(res => res.json())
+//       .then(data => {
+//         const isBookmarked = data.some(article => article._id === id);
+//         setBookmarked(isBookmarked);
+//       });
+//   }
+// }, [user, id]);
 
 
 
@@ -87,7 +87,7 @@ useEffect(() => {
       timestamp: new Date(),
     };
 
-    fetch(`http://localhost:5000/comments`, {
+    fetch(`https://knowledege-project.vercel.app/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -110,7 +110,7 @@ useEffect(() => {
     const handleLike = () => {
      if (!alreadyLiked) {
     // Add like
-    fetch(`http://localhost:5000/likes`, {
+    fetch(`https://knowledege-project.vercel.app/likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -128,7 +128,7 @@ useEffect(() => {
       });
   } else {
     // Remove like
-    fetch(`http://localhost:5000/likes`, {
+    fetch(`https://knowledege-project.vercel.app/likes`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -145,44 +145,44 @@ useEffect(() => {
   }
 };
 
-const handleBookmark = () => {
-  if (!bookmarked) {
-    // Save bookmark
-    fetch("http://localhost:5000/bookmarks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify({ articleId: id }),
-    })
-      .then(res => res.json())
-      .then(() => {
-        setBookmarked(true);
-        toast.success("🔖 Article bookmarked!");
-      })
-      .catch(err => {
-        console.error(err);
-        toast.error("Failed to bookmark article");
-      });
-  } else {
-    // Remove bookmark
-    fetch(`http://localhost:5000/bookmarks/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${user.token}`,
-      },
-    })
-      .then(() => {
-        setBookmarked(false);
-        toast("Bookmark removed", { icon: "🗑️" });
-      })
-      .catch(err => {
-        console.error(err);
-        toast.error("Failed to remove bookmark");
-      });
-  }
-};
+// const handleBookmark = () => {
+//   if (!bookmarked) {
+//     // Save bookmark
+//     fetch("https://knowledege-project.vercel.app/bookmarks", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         authorization: `Bearer ${user.token}`,
+//       },
+//       body: JSON.stringify({ articleId: id }),
+//     })
+//       .then(res => res.json())
+//       .then(() => {
+//         setBookmarked(true);
+//         toast.success("🔖 Article bookmarked!");
+//       })
+//       .catch(err => {
+//         console.error(err);
+//         toast.error("Failed to bookmark article");
+//       });
+//   } else {
+//     // Remove bookmark
+//     fetch(`https://knowledege-project.vercel.app/bookmarks/${id}`, {
+//       method: "DELETE",
+//       headers: {
+//         authorization: `Bearer ${user.token}`,
+//       },
+//     })
+//       .then(() => {
+//         setBookmarked(false);
+//         toast("Bookmark removed", { icon: "🗑️" });
+//       })
+//       .catch(err => {
+//         console.error(err);
+//         toast.error("Failed to remove bookmark");
+//       });
+//   }
+// };
 
 
 
@@ -220,12 +220,12 @@ const handleBookmark = () => {
             💬 Comments ({comments.length})
           </span>
 
-       <button
+       {/* <button
   onClick={handleBookmark}
   className={`btn btn-outline ${bookmarked ? "btn-warning" : "btn-info"}`}
 >
   {bookmarked ? "🔖 Bookmarked" : "📑 Save"}
-</button>   
+</button>    */}
         </div>
       </div>
 
@@ -251,7 +251,7 @@ const handleBookmark = () => {
 
         <div className="space-y-4 max-h-[500px] overflow-y-auto">
           {comments.map((c, index) => (
-            <div key={index} className="border p-3 rounded bg-white">
+            <div key={index} className="border p-3 rounded bg-base-100">
               <div className="flex items-center gap-2">
                 <img
                   src={c.userPhoto}

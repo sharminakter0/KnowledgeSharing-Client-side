@@ -1,11 +1,11 @@
-"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send, Facebook, Twitter, Linkedin } from "lucide-react";
 
 const ContactUs = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-15 pt-25 px-6 sm:px-10 md:px-20">
+    <div className="min-h-screen bg-base-200 dark:bg-gray-900 pb-15 pt-25 px-6 sm:px-10 md:px-20">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -29,7 +29,7 @@ const ContactUs = () => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md"
+          className="bg-base-100 dark:bg-gray-800 p-8 rounded-2xl "
         >
           <h2 className="text-2xl font-semibold text-blue-600 mb-6">
             Send Us a Message
